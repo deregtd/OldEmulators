@@ -1,0 +1,134 @@
+//---------------------------------------------------------------------------
+#include <vcl\vcl.h>
+#pragma hdrstop
+
+#include "States.h"
+#include "6502.h"
+#include "audio.h"
+//---------------------------------------------------------------------------
+BYTE SelState = 0;
+AnsiString filename;
+//---------------------------------------------------------------------------
+extern BYTE A, X, Y, SP, P;
+extern unsigned long int PC, TU;
+extern bool NMIonVBlank,NMIonSprHit,SSize,BkPTA,SpPTA,PPUAdrI,SprVis,BGVis,SprClip,BGClip,DispType;
+extern bool VBlankOcc,Spr0Occ,ScLnSprCnt,VRAMWrFlg, VFirstRead, SFirstRead, CPURunning, TUMode;
+extern LBYTE NTabAdr;
+extern MemSt Mem;
+extern PulseChanSt PulseChan[2];
+extern TriChanSt TriChan;
+extern NoiseChanSt NoiseChan;
+extern DCMChanSt DCMChan;
+//---------------------------------------------------------------------------
+struct SaveStateStruct {
+   // CPU stuff
+   // CPU Regs and program counter
+   BYTE A, X, Y, P, SP;
+   LBYTE PC;
+
+   // In order of occurence in the file, ROM page numbers ($8/A/C/E000) and
+   // CHR ($00/04/08/0C/10/14/18/1C00) page numbers.
+   BYTE PRGPage[4], CHRPage[8];
+
+   BYTE RAM[0x800];
+   bool SRAMEnabled;
+   BYTE SRAM[0x2000];   //Save RAM
+
+   BYTE VRAM[0x2000];   //If VRAM is present, else leave zeroed out and just use the CHRPage[]
+   BYTE SPRRAM[0x100];  // Sprite RAM
+   BYTE NameTables[0x1000];
+   BYTE Palette[32];
+   BYTE CurrMirroring[4];
+
+   LBYTE VRAMAddress;
+   BYTE SPRRAMAddress;
+   BYTE BgScrollX, BgScrollY;
+
+//   BYTE RegsLow[8];
+   BYTE RegsSound[0x15]; //$4000-$4013 and $4015
+
+   // Mapper sundries - differs for each mapper
+   BYTE MMCData[128];
+};
+//---------------------------------------------------------------------------
+void SaveState()
+{
+		AnsiString tmpfnamea = filename + AnsiString(SelState);
+		char * tmpfname = tmpfnamea.c_str();
+
+		FILE * out = fopen(tmpfname, "wb");
+
+		SaveStateStruct ts;
+
+		ts.A = A; ts.X = X; ts.Y = Y; ts.P = P; ts.SP = SP; ts.PC = (LBYTE) PC;
+
+		memcpy(&ts.PRGPage[0], &Mem.PRGPageNum[0], 4);
+		memcpy(&ts.CHRPage[0], &Mem.CHRPageNum[0], 8);
+
+		memcpy(&ts.RAM[0], &Mem.MainRAM[0], 0x800);
+		ts.SRAMEnabled = Mem.SRAMEnabled;
+		memcpy(&ts.SRAM[0], &Mem.SRAM[0], 0x2000);
+		if (Mem.CHRPages == 0)
+			for (int i=0;i<8;i++)
+				memcpy(&ts.VRAM[i << 10], &Mem.CHRPage[i][0], 0x400);
+		memcpy(&ts.SPRRAM[0], &Mem.Sprite[0], 0x100);
+		for (int i=0;i<0x1000;i++)
+			ts.NameTables[i] = *Mem.PPU[0x2000 | i];
+		for (int i=0;i<32;i++)
+			ts.Palette[i] = *Mem.PPU[0x3F00 | i];
+		memcpy(&ts.CurrMirroring[0], &Mem.CurrMirroring[0], 4);
+
+		ts.VRAMAddress = (LBYTE) Mem.VRAMAddress;
+		ts.SPRRAMAddress = Mem.SPRAddress;
+		ts.BgScrollX = Mem.BgScrollX;
+                ts.BgScrollY = (BYTE) Mem.BgScrollY;
+
+                ts.RegsSound[0x14] = (BYTE) (PulseChan[0].Enabled | (PulseChan[1].Enabled << 1) | (TriChan.Enabled << 2) | (NoiseChan.Enabled << 3) | (DCMChan.Enabled << 4));
+
+		fwrite(&ts, sizeof(ts), 1, out);
+		fclose(out);
+}
+void LoadState()
+{
+	AnsiString tmpfnamea = filename + AnsiString(SelState);
+	char * tmpfname = tmpfnamea.c_str();
+
+	FILE * in = fopen(tmpfname, "r+b");
+
+	SaveStateStruct ts;
+	fread(&ts, sizeof(ts), 1, in);
+
+/*
+		ts.A = Mem.Accum; ts.X = X; ts.Y = Y; ts.P = P; ts.SP = SP; ts.PC = PC;
+
+		memcpy(&ts.PRGPage[0], &Mem.PRGPageNum[0], 4);
+		memcpy(&ts.CHRPage[0], &Mem.CHRPageNum[0], 8);
+
+		memcpy(&ts.RAM[0], &Mem.MainRAM[0], 0x800);
+		ts.SRAMEnabled = Mem.SRAMEnabled;
+		memcpy(&ts.SRAM[0], &Mem.SRAM[0], 0x2000);
+		if (Mem.CHRPages == 0)
+			for (int i=0;i<8;i++)
+				memcpy(&ts.VRAM[i << 10], &Mem.CHRPage[i][0], 0x400);
+		memcpy(&ts.SPRRAM[0], &Mem.Sprite[0], 0x100);
+		for (int i=0;i<0x1000;i++)
+			ts.NameTables[i] = *Mem.PPU[0x2000 | i];
+		for (int i=0;i<32;i++)
+			ts.Palette[i] = *Mem.PPU[0x3F00 | i];
+		memcpy(&ts.CurrMirroring[0], &Mem.CurrMirroring[0], 4);
+
+		ts.VRAMAddress = Mem.VRAMAddress;
+		ts.SPRRAMAddress = Mem.SPRAddress;
+		ts.BgScrollX = Mem.BgScrollX;
+                ts.BgScrollY = (BYTE) Mem.BgScrollY;
+
+                ts.RegsSound[0x14] = (BYTE) (PulseChan[0].Enabled | (PulseChan[1].Enabled << 1) | (TriChan.Enabled << 2) | (NoiseChan.Enabled << 3) | (DCMChan.Enabled << 4));
+*/
+	fclose(in);
+}
+void UpdateStateSel(BYTE NewState)
+{
+	SelState = NewState;
+}
+//---------------------------------------------------------------------------
+

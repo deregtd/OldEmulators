@@ -1,0 +1,171 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: NinthStar - Win32 Release--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating command line "rc.exe /l 0x409 /fo"Release/NinthStar.res" /d "NDEBUG" "C:\C++\NinthStar\NinthStar.rc"" 
+Creating temporary file "C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\RSP28D.tmp" with contents
+[
+/nologo /G6 /ML /GX /O2 /Ob2 /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_MBCS" /FAs /Fa"Release/" /FR"Release/" /Fp"Release/NinthStar.pch" /Yu"stdafx.h" /Fo"Release/" /Fd"Release/" /FD /c 
+"C:\C++\NinthStar\NES\2A03.cpp"
+"C:\C++\NinthStar\NES.cpp"
+"C:\C++\NinthStar\NES\NES_APU.cpp"
+"C:\C++\NinthStar\NES\NES_Controllers.cpp"
+"C:\C++\NinthStar\NES\NES_Debugger.cpp"
+"C:\C++\NinthStar\NES\NES_GFX.cpp"
+"C:\C++\NinthStar\NES\NES_Handlers.cpp"
+"C:\C++\NinthStar\NES\NES_PPU.cpp"
+"C:\C++\NinthStar\NES\NES_PPU_Pixel.cpp"
+"C:\C++\NinthStar\NES\NES_PPU_Scanline.cpp"
+"C:\C++\NinthStar\Nes\NES_PPU_Tile.cpp"
+"C:\C++\NinthStar\NES\NES_States.cpp"
+"C:\C++\NinthStar\Atari2600\6507.cpp"
+"C:\C++\NinthStar\Atari2600\A26_Debugger.cpp"
+"C:\C++\NinthStar\Atari2600\A26_GFX.cpp"
+"C:\C++\NinthStar\Atari2600\A26_PIA.CPP"
+"C:\C++\NinthStar\Atari2600\A26_TIA.CPP"
+"C:\C++\NinthStar\Atari2600.cpp"
+"C:\C++\NinthStar\Genesis\68000.cpp"
+"C:\C++\NinthStar\Genesis\Gen_Debugger.cpp"
+"C:\C++\NinthStar\Genesis\Gen_GFX.cpp"
+"C:\C++\NinthStar\Genesis.cpp"
+"C:\C++\NinthStar\Coleco\Col_Controllers.cpp"
+"C:\C++\NinthStar\Coleco\Col_Debugger.cpp"
+"C:\C++\NinthStar\Coleco\Col_GFX.cpp"
+"C:\C++\NinthStar\Coleco\Col_PPU.cpp"
+"C:\C++\NinthStar\Coleco\Col_Z80.cpp"
+"C:\C++\NinthStar\Coleco.cpp"
+"C:\C++\NinthStar\Global.cpp"
+"C:\C++\NinthStar\NinthStar.cpp"
+]
+Creating command line "cl.exe @C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\RSP28D.tmp" 
+Creating temporary file "C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\RSP28E.tmp" with contents
+[
+/nologo /G6 /ML /GX /O2 /Ob2 /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_MBCS" /FAs /Fa"Release/" /FR"Release/" /Fp"Release/NinthStar.pch" /Yc"stdafx.h" /Fo"Release/" /Fd"Release/" /FD /c 
+"C:\C++\NinthStar\StdAfx.cpp"
+]
+Creating command line "cl.exe @C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\RSP28E.tmp" 
+Creating temporary file "C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\RSP28F.tmp" with contents
+[
+kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib d3d8.lib dinput8.lib dxguid.lib dsound.lib /nologo /subsystem:windows /profile /machine:I386 /out:"Release/NinthStar.exe" 
+".\Release\StdAfx.obj"
+".\Release\2A03.obj"
+".\Release\NES.obj"
+".\Release\NES_APU.obj"
+".\Release\NES_Controllers.obj"
+".\Release\NES_Debugger.obj"
+".\Release\NES_GFX.obj"
+".\Release\NES_Handlers.obj"
+".\Release\NES_PPU.obj"
+".\Release\NES_PPU_Pixel.obj"
+".\Release\NES_PPU_Scanline.obj"
+".\Release\NES_PPU_Tile.obj"
+".\Release\NES_States.obj"
+".\Release\6507.obj"
+".\Release\A26_Debugger.obj"
+".\Release\A26_GFX.obj"
+".\Release\A26_PIA.OBJ"
+".\Release\A26_TIA.OBJ"
+".\Release\Atari2600.obj"
+".\Release\68000.obj"
+".\Release\Gen_Debugger.obj"
+".\Release\Gen_GFX.obj"
+".\Release\Genesis.obj"
+".\Release\Col_Controllers.obj"
+".\Release\Col_Debugger.obj"
+".\Release\Col_GFX.obj"
+".\Release\Col_PPU.obj"
+".\Release\Col_Z80.obj"
+".\Release\Coleco.obj"
+".\Release\Global.obj"
+".\Release\NinthStar.obj"
+".\Release\NinthStar.res"
+]
+Creating command line "link.exe @C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\RSP28F.tmp"
+<h3>Output Window</h3>
+Compiling resources...
+Compiling...
+StdAfx.cpp
+Compiling...
+2A03.cpp
+NES.cpp
+NES_APU.cpp
+NES_Controllers.cpp
+NES_Debugger.cpp
+NES_GFX.cpp
+NES_Handlers.cpp
+NES_PPU.cpp
+NES_PPU_Pixel.cpp
+NES_PPU_Scanline.cpp
+NES_PPU_Tile.cpp
+NES_States.cpp
+6507.cpp
+A26_Debugger.cpp
+A26_GFX.cpp
+A26_PIA.CPP
+A26_TIA.CPP
+Atari2600.cpp
+68000.cpp
+Gen_Debugger.cpp
+Generating Code...
+Compiling...
+Gen_GFX.cpp
+Genesis.cpp
+Col_Controllers.cpp
+Col_Debugger.cpp
+Col_GFX.cpp
+Col_PPU.cpp
+Col_Z80.cpp
+Coleco.cpp
+Global.cpp
+NinthStar.cpp
+Generating Code...
+Linking...
+Creating temporary file "C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\RSP293.tmp" with contents
+[
+/nologo /o"Release/NinthStar.bsc" 
+".\Release\StdAfx.sbr"
+".\Release\2A03.sbr"
+".\Release\NES.sbr"
+".\Release\NES_APU.sbr"
+".\Release\NES_Controllers.sbr"
+".\Release\NES_Debugger.sbr"
+".\Release\NES_GFX.sbr"
+".\Release\NES_Handlers.sbr"
+".\Release\NES_PPU.sbr"
+".\Release\NES_PPU_Pixel.sbr"
+".\Release\NES_PPU_Scanline.sbr"
+".\Release\NES_PPU_Tile.sbr"
+".\Release\NES_States.sbr"
+".\Release\6507.sbr"
+".\Release\A26_Debugger.sbr"
+".\Release\A26_GFX.sbr"
+".\Release\A26_PIA.SBR"
+".\Release\A26_TIA.SBR"
+".\Release\Atari2600.sbr"
+".\Release\68000.sbr"
+".\Release\Gen_Debugger.sbr"
+".\Release\Gen_GFX.sbr"
+".\Release\Genesis.sbr"
+".\Release\Col_Controllers.sbr"
+".\Release\Col_Debugger.sbr"
+".\Release\Col_GFX.sbr"
+".\Release\Col_PPU.sbr"
+".\Release\Col_Z80.sbr"
+".\Release\Coleco.sbr"
+".\Release\Global.sbr"
+".\Release\NinthStar.sbr"]
+Creating command line "bscmake.exe @C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\RSP293.tmp"
+Creating browse info file...
+<h3>Output Window</h3>
+
+
+
+<h3>Results</h3>
+NinthStar.exe - 0 error(s), 0 warning(s)
+</pre>
+</body>
+</html>

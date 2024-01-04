@@ -1,0 +1,347 @@
+                        ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+                             NES4PC
+                              v.20
+                        ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+
+        ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+        ³ NES4PC General Info ³
+        ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+
+  NES4PC is a Nintendo Entertainment System emulator for Windows 95/98/NT.
+It is programmed in Borland C++ Builder, and is entirely in C++, although I
+am working on a QBasic port out of curiosity, and in hopes that I'll find a
+bug in the windows CPU core by not making the same bug in the QBasic version
+and then comparing cores. =)  Too bad I'm making more bugs in the QBasic core
+than in the C++ core, but anyhoo... =P
+  NES4PC is written by David de Regt, who goes by the nickname of AkIlLa^ in
+most internet places.  Yes, for those of you who recognize the nickname, I
+*AM* the one who did the FF3e translation that was furthest until AWJ/Som2
+did theirs.  But anyway, on to the juicy tidbits of info that you actually
+wanna read!
+
+        ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+        ³ Any Needed Instructions ³
+        ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+
+  *The Paddle*
+You control the paddle with the left/right keys that you set being turning it
+left/right, and with the A button that you set being its one button.
+
+  *The Zapper*
+You control the zapper with the mouse.  You click on the displayed screen to
+fire the zapper at that coordinate.  In the future, I might implement
+something like a random jitter for the mouse cursor to make it not so easy to
+aim.  If I leave it this way, most of Duck Hunt is easy as sin. =)
+
+  *ROM Trainers*
+NES4PC currently does not correctly support ROM trainers.  If a ROM has a
+trainer in it, you can try it on NES4PC, but it most likely won't work.  Try
+to find a copy of the ROM that doesn't have a trainer.
+
+  *Video Modes*
+If you are in 32-bit color mode, then you will have to switch color depths to
+see any graphics.  I'd recommend 8-bit mode since it's your best shot at
+getting full speed. =)
+
+        ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+        ³ New in this version ³
+        ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+
+* CPU: Timing is insanely better!
+* CPU: Continued this pattern by changing pushing/pulling PC to/from the stack
+       to the actual value which is: on pushing (eg. JSR or an interrupt), the
+       current pc is decrimented by 1, and on pulling it again (eg. RTS/RTI)
+       the value is incremented by 1.
+* CPU: Fixed JSR/RTS bug.  Apparently in the real nes, there's a bug in the
+       JSR/RTS commands that reverse eachother, but I have to add the fixes
+       anyway for ROMs that manually manipulate the stack.
+* CPU: Added fix for indirect jump 6502 bug (yep another actual 6502 bug =P )
+* CPU: Added fix for indirect indexed 6502 bug (and ANOTHER actual 6502 bug
+       =P )
+* CPU: Removed all remnants of undocumented opcodes.  I have been informed on
+       all sides that there are no undocumented opcodes in the NMOS 6502.
+* PPU: Added Sprite #0 Hit detection!
+* PPU: Timing is insanely better!
+* PPU: Fixed up first vram read being invalid and not having it increment it,
+       but after first read to increment it, and I decided that first read
+       counted as a number of things, but in any event, it works. =)
+* PPU: Added scanline-based vblank/hblank code, no scanline-based graphics
+       engine yet though or even a tile-based one.  And no mid-hblank vram
+       writes or sprite 0 hit detection.  Still trying to work out reasonably
+       speedy (and accurate) code before implementing those.
+* PPU: Made Vertical Scrolls of more than 239 be the correct negative scroll
+* Graphics: Fixed a few color bugs in the 8-bit color mode
+* SRAM: Fully Implemented!  Compatable with Nesticle's SRAM save files too.
+* Mappers: MMC3 Completely Fixed as far as I can tell.
+* Mappers: MMC1 Register-setting code rewritten.  It was setting the register
+           backwards which kinda caused a rather large problem.  Now MMC1 is
+           perfect... Doh! =)
+* Controllers: Finally I got "Duck Hunt" working, and so I was able to test
+               the zapper.  I've implemented everything Y0SHi's doc outlines
+               (Sprite under crosshair, trigger pressed), but it doesn't
+               say anything else about it.  Duck Hunt currently does its nice
+               little white flare thing when you pull the trigger, but it
+               doesn't show that you hit the duck even though I've set all
+               the flags correctly.  Oh well...  I hope someone can help me
+               with this since I really wanna get it working.
+* Interface: Added a Timing window just like nesticle has.  You might wanna
+             use it to fine-tune some games.  It automatically pops up when
+             you run NES4PC, so you might need to move the main window out of
+             the way before you can see it.
+* Interface: Added "Update Video Mode" Option so that if you switch windows
+             while in 8-bit color mode, and when you come back the palette is
+             all skewed, you can do this and it'll generate a new matching
+             palette and things should look all right again.  You should also
+             use this if you switch color depths after running the program
+             so that it tells the graphics engine to switch to a new color
+             depth.
+* Interface: Added trainer notification since all games with trainers jump
+             to the trainer a lot and my emu doesn't support trainers yet so
+             it just crashes out on you.  This tells you to get a new ROM.
+* Interface: Removed "Force VBlank" command since the new timing would be
+             all screwed up if you forced a vblank.  Instead I replaced it
+             with a "Force NMI" command and a "Halt on NMI" option so that
+             you can do the technical aspects of a VBlank as needed.
+* Interface: I made the trace window non-read-only so you can just
+             clear select portions of it if you want to instead of clearing
+             the whole thing when it gets full.
+* Interface: Since Diskdude neglected to prepare for mapper #s more than 16,
+             in his rom manipulating program, he had it write "DiskDude!" to
+             bytes 7-15 of the ROM header.  Unfortunately, byte 7 is now used
+             for the high 4 bits of the mapper number.  Previously, all roms
+             with Diskdude's screwey header reported mapper numbers of 64 or
+             65 or so.  I added something that detects for the diskdude header
+             and deletes it from the file (saves it to disk) if it is found.
+* Interface: Added switch for NTSC or PAL mode
+* Interface: Added option to halt on bad opcodes or not
+* Interface: Made "Force Screen Render" debug command not affected by
+             frameskipping.
+* Interface: Moved bad opcode message to the trace window and made it shorter
+
+        ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+        ³ Expect Next Version or So ³
+        ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+
+* Saving of settings into the system registry or a .INI file
+* Save States
+* Fixed zapper
+* Random zapper jitter
+* "Target" mouse cursor for the zapper
+* Mapper #15 Completed
+* Quad Controllers
+* DirectSound support for at least Pulse 1/2 and probably tri/noise as well
+
+        ÚÄÄÄÄÄÄÄÄÄÄ¿
+        ³ Requests ³
+        ÀÄÄÄÄÄÄÄÄÄÄÙ
+
+1. Information on the zapper.  Specifically, how to tell it which sprite it is
+   over and, if applicable, what the x/y coords of the zapper are.  Basically
+   any info on the zapper other than what's in Y0SHi's documentation.
+2. Any tips on the user interface.  If you want me to add anything to it, just
+   ask and I'll at least consider it.
+
+        ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+        ³ Beta Testers ³
+        ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+
+  OK, I've lowered the restrictions on being a beta tester since I had to go
+hunt people down to beta test it for me.  I meant the original requirements
+as a nebula filter not a solar filter (only fellow astronomers will understand
+that). =)
+
+  If you have a will to help me with this (I'll provide the way =P ), then
+contact me right away.  I'd really appreciate people with SOME technical
+knowledge, but friendly and helpful people are generally accepted too.
+
+        ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+        ³ Contacting the Author ³
+        ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+
+Name:           David de Regt
+Location:       Bellevue, WA, USofA
+IRC:
+        UnderNet:       #gbinfow/#emu
+        EfNet:          #emu/#romhack/#zopharsdomain
+Email:
+        For the next few weeks:         akilla@dycom.net
+        After the next few weeks:       akilla@earthlink.net
+
+        ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+        ³ Version History ³
+        ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+
+v0.15 Public Beta 1 (11/19/98):
+* Graphics: 8-Bit GRAPHICS MODE PERFECTED!  Speedy as hell!  Much faster than
+            16-bit and 24-bit modes!
+* CPU: Removed the 3 undocumented instructions since I don't think they belong
+       implemented and all you get is a few more invalid opcode messages but
+       the games still run fine since the emulator isn't set to stop on bad
+       opcodes.
+* Memory: Memory management largely redone.  Bank switching code erased and
+          rewrote from scratch (ooh that was fun...)  Now it's much more
+          accurate, however, and mappers should work much better as well as
+          that the emulator should GPF a lot less!
+* PPU: Fixed large background scroll bug that made it scroll 240 rows of the
+       name tables on the y axis instead of the NTSC 224.
+* PPU: Fixed huge background scroll bug where it wasn't overflowing and
+       starting over again at the first name table in the scroll.
+* PPU: Made Background scroll Y value set to 0 if it's more than 239.  It's
+       not correct, but it's a temporary solution until I make the PPU code
+       wrappable for those purposes.
+* PPU: Made background color go for whole name table array instead of just
+       the first one.
+* PPU: Large bug fixed in rendering code - Not all 224 rows were being drawn
+       which was cutting off the lower 8 rows of some games, and specifically,
+       the Zelda title screen demo.  That now displays perfectly.
+* PPU: HUGE BUG FIXED in scrolling since name tables weren't being drawn
+       fully so that's what was causing those blank lines in games like
+       Thexder!
+* VRAM: A few read/write bugs fixed
+* Game Genie: Fully Implemented!  6-Letter and 8-Letter Codes!
+* Interface: Because of the new bank switching engine, the PRG/CHR debug
+             captions are now rendered useless since it would be too long to
+             fit on the lines provided and would be unusable for most purposes
+             since it's so different from the actual page #s which use unique
+             bank sizes for each mapper.
+* Interface: Added automatic frameskipping
+* Interface: HUGE BUG FIXED in name table viewer
+* Interface: Made it set up everything as soon as the emulator is run instead
+             of when you load a game.  This should make it so that it doesn't
+             always GPF if you do anything before loading a game. =)
+* Interface: Changed controller config window to the general options window
+             and put all configuration options in there like Game Genie codes,
+             frameskipping options, etc...
+* Interface: GPFs a **LOT** less!
+* Mappers: Fixed a large bug in Mapper #1 (MMC1) where it wasn't resetting
+           the MMC1 registers right.
+* Mappers: A few bugs fixed in Mapper #4 (MMC3).
+* Mappers: Mapper #15 Partially Implemented, but I need much more info on it!
+           The info I have is VERY vague (firebug's doc)!  It's disabled here
+           because it hasn't been rewritten for the new bank switching engine
+           yet.
+* Mappers: Removed support all mappers above #7 (Except #15) because I haven't
+           found any ROMs to test on them yet and I didn't want to reimplement
+           them in my new bank switching format if there was no point to it.
+
+v0.12 Beta (11/9/98):
+* CPU: Added two undocumented instructions
+* CPU: Fixed an addressing mode bug
+* CPU: Tweaked a few instructions
+* PPU: Fixed huge bug in vertical scrolling.  The game genie demo should be
+       perfect now.
+* PPU: Fixed 8x16 sprite display bug
+* PPU: Fixed NTSC/PAL display centering bug
+* PPU: Fixed background scrolling bug
+* PPU: Fixed large background color bug
+* Controllers: Paddle support added
+* Controllers: Initial Zapper support added
+* Mappers: Fixed a few MMC1 Bugs
+* Mappers: Finished initial MMC3 Implementation, although I don't know how
+           the IRQs are supposed to work...  NE1 wanna help me out with this?
+* General: A few minor speedups
+
+v0.1 Beta (11/5/98):
+* First Version   
+
+        ÚÄÄÄÄÄÄÄÄÄÄ¿
+        ³ Features ³
+        ÀÄÄÄÄÄÄÄÄÄÄÙ
+
+ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÂÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÂÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+³ Part in question ³ Supported            ³ To Do                     ³
+ÆÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍØÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍØÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍµ
+³ 6502 CPU         ³ All documented op-   ³ Fix registers and all the ³
+³                  ³ codes and addressing ³ other things that are     ³
+³                  ³ modes                ³ doubtlessly broken        ³
+³                  ³                      ³                           ³
+³                  ³ NTSC and PAL timing  ³                           ³
+³                  ³                      ³                           ³
+³                  ³ Scanline-based timing³                           ³
+ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+³ PPU              ³ All mirroring, pal-  ³ Scanline-based tile       ³
+³                  ³ ettes, scrolling,    ³ rendering                 ³
+³                  ³ sprites (8x8 & 8x16),³                           ³
+³                  ³ sprite flipping,     ³                           ³
+³                  ³ sprite priority      ³                           ³
+³                  ³                      ³                           ³
+³                  ³ Scanline-based timing³                           ³
+³                  ³                      ³                           ³
+³                  ³ Sprite #0 Hit Detect ³                           ³
+ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+³ SRAM             ³ Fully Implemented    ³
+³                  ³                      ³
+³                  ³ Compatable with      ³
+³                  ³ Nesticle's SRAM      ³
+³                  ³ save files           ³
+ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+³ pAPU             ³ All channels partly  ³
+³                  ³ emulated in code.    ³
+ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+³ Save States      ³ Nothing              ³ Saving/Loading to files   ³
+³                  ³                      ³ on the fly with unlimited ³
+³                  ³                      ³ save states               ³
+³                  ³                      ³                           ³
+³                  ³                      ³ Compatability with .STx   ³
+³                  ³                      ³ save states from Nesticle ³
+ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+³ Mappers          ³ Fully Supported and  ³ Finish #15                ³
+³                  ³ Tested:              ³                           ³
+³                  ³ 0, 1, 2, 3, 4, 7     ³ Add the rest of them      ³
+³                  ³                      ³                           ³
+³                  ³ Working On:          ³                           ³
+³                  ³ 15                   ³                           ³
+ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+³ Controllers      ³ 2 Joypads using the  ³ Quad Controllers          ³
+³                  ³ keyboard             ³                           ³
+³                  ³                      ³ Finished Zapper           ³
+³                  ³ Paddle               ³                           ³
+³                  ³                      ³ DirectInput               ³
+³                  ³ Most of the Zapper   ³                           ³
+ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+³ Graphics         ³ 24-bit, 16-bit,      ³ DirectDraw                ³
+³                  ³ 8-bit                ³                           ³
+³                  ³                      ³ 32-bit color mode         ³
+³                  ³ Variable frameskip & ³                           ³
+³                  ³ FPS meter            ³                           ³
+³                  ³                      ³                           ³
+³                  ³ Autoframeskipping    ³                           ³
+ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+³ Sound            ³ Disabled Pulse 1/2   ³ Fixed Pulse 1/2 output,   ³
+³                  ³ sound output         ³ Triangle, Noise, and DMC  ³
+³                  ³                      ³ output.                   ³
+³                  ³                      ³                           ³
+³                  ³                      ³ DirectSound               ³
+ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+³ Game Genie       ³ Full Support for 6   ³
+³                  ³ and 8 letter codes!  ³
+ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+³ Debugger         ³ Hugely extensive     ³
+³                  ³ debugger, has every- ³
+³                  ³ thing you'd need to  ³
+³                  ³ test and debug a     ³
+³                  ³ game you wrote or    ³
+³                  ³ to simply find out   ³
+³                  ³ where the lives var- ³
+³                  ³ iable is stored. =)  ³
+ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÁÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+
+        ÚÄÄÄÄÄÄÄÄ¿
+        ³ Thanks ³
+        ÀÄÄÄÄÄÄÄÄÙ
+
+Johannes Holmberg, programmer of unNESsential, for having made the
+  same 6502 CPU bugs as me while programming it, and telling
+  me how to fix them, as well as providing tips for various
+  other aspects of emulating the NES, and lastly for beta-
+  testing the emulator!
+
+Y0SHi, for his personal answers to my nagging questions and for
+  giving me confidential material of his which I won't mention
+  but he knows what I'm talking about.  Let's just say it
+  really REALLY helped!
+
+Barubary, for all his help with the specific cpu instruction and addressing
+  mode bugs in the real 6502.  Thanks to him, my compatability did something
+  of a VERY large increase the night after we chatted (Duck Hunt, Stackup,
+  Thexder perfected, many many others...)

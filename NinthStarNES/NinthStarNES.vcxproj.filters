@@ -1,0 +1,160 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{bf673a58-ffbd-40a3-944e-86d39c9ae7cb}</UniqueIdentifier>
+      <Extensions>ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe</Extensions>
+    </Filter>
+    <Filter Include="Resource Files\Extern Dependencies">
+      <UniqueIdentifier>{3ba1dc97-cdef-495b-a67e-e221cfaff4c1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="NES">
+      <UniqueIdentifier>{b4addaa5-77d8-4f5c-bcb6-acb893a5abb6}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="NinthStar.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="small.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="resource.h">
+      <Filter>Resource Files</Filter>
+    </ClInclude>
+    <ClInclude Include="StdAfx.h">
+      <Filter>Resource Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Program Files\Microsoft Visual Studio\VC98\Include\BASETSD.H">
+      <Filter>Resource Files\Extern Dependencies</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Program Files\Microsoft Visual Studio\VC98\Include\d3d8.h">
+      <Filter>Resource Files\Extern Dependencies</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Program Files\Microsoft Visual Studio\VC98\Include\d3d8caps.h">
+      <Filter>Resource Files\Extern Dependencies</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Program Files\Microsoft Visual Studio\VC98\Include\d3d8types.h">
+      <Filter>Resource Files\Extern Dependencies</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Program Files\Microsoft Visual Studio\VC98\Include\d3dx8.h">
+      <Filter>Resource Files\Extern Dependencies</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Program Files\Microsoft Visual Studio\VC98\Include\d3dx8core.h">
+      <Filter>Resource Files\Extern Dependencies</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Program Files\Microsoft Visual Studio\VC98\Include\d3dx8effect.h">
+      <Filter>Resource Files\Extern Dependencies</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Program Files\Microsoft Visual Studio\VC98\Include\d3dx8math.h">
+      <Filter>Resource Files\Extern Dependencies</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Program Files\Microsoft Visual Studio\VC98\Include\d3dx8mesh.h">
+      <Filter>Resource Files\Extern Dependencies</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Program Files\Microsoft Visual Studio\VC98\Include\d3dx8shape.h">
+      <Filter>Resource Files\Extern Dependencies</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Program Files\Microsoft Visual Studio\VC98\Include\d3dx8tex.h">
+      <Filter>Resource Files\Extern Dependencies</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Program Files\Microsoft Visual Studio\VC98\Include\dxfile.h">
+      <Filter>Resource Files\Extern Dependencies</Filter>
+    </ClInclude>
+    <ClInclude Include="NES\2A03.h">
+      <Filter>NES</Filter>
+    </ClInclude>
+    <ClInclude Include="NES.h">
+      <Filter>NES</Filter>
+    </ClInclude>
+    <ClInclude Include="NES\NES_APU.h">
+      <Filter>NES</Filter>
+    </ClInclude>
+    <ClInclude Include="NES\NES_Controllers.h">
+      <Filter>NES</Filter>
+    </ClInclude>
+    <ClInclude Include="NES\NES_Debugger.h">
+      <Filter>NES</Filter>
+    </ClInclude>
+    <ClInclude Include="NES\NES_GFX.h">
+      <Filter>NES</Filter>
+    </ClInclude>
+    <ClInclude Include="NES\NES_Handlers.h">
+      <Filter>NES</Filter>
+    </ClInclude>
+    <ClInclude Include="NES\NES_MapperInterface.h">
+      <Filter>NES</Filter>
+    </ClInclude>
+    <ClInclude Include="NES\NES_PPU.h">
+      <Filter>NES</Filter>
+    </ClInclude>
+    <ClInclude Include="NES\NES_PPU_Pixel.h">
+      <Filter>NES</Filter>
+    </ClInclude>
+    <ClInclude Include="NES\NES_PPU_Scanline.h">
+      <Filter>NES</Filter>
+    </ClInclude>
+    <ClInclude Include="Nes\NES_PPU_Tile.h">
+      <Filter>NES</Filter>
+    </ClInclude>
+    <ClInclude Include="NES\NES_States.h">
+      <Filter>NES</Filter>
+    </ClInclude>
+    <ClInclude Include="EmuBase.h" />
+    <ClInclude Include="Global.h" />
+    <ClInclude Include="NinthStar.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="StdAfx.cpp">
+      <Filter>Resource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="NES\2A03.cpp">
+      <Filter>NES</Filter>
+    </ClCompile>
+    <ClCompile Include="NES.cpp">
+      <Filter>NES</Filter>
+    </ClCompile>
+    <ClCompile Include="NES\NES_APU.cpp">
+      <Filter>NES</Filter>
+    </ClCompile>
+    <ClCompile Include="NES\NES_Controllers.cpp">
+      <Filter>NES</Filter>
+    </ClCompile>
+    <ClCompile Include="NES\NES_Debugger.cpp">
+      <Filter>NES</Filter>
+    </ClCompile>
+    <ClCompile Include="NES\NES_GFX.cpp">
+      <Filter>NES</Filter>
+    </ClCompile>
+    <ClCompile Include="NES\NES_Handlers.cpp">
+      <Filter>NES</Filter>
+    </ClCompile>
+    <ClCompile Include="NES\NES_PPU.cpp">
+      <Filter>NES</Filter>
+    </ClCompile>
+    <ClCompile Include="NES\NES_PPU_Pixel.cpp">
+      <Filter>NES</Filter>
+    </ClCompile>
+    <ClCompile Include="NES\NES_PPU_Scanline.cpp">
+      <Filter>NES</Filter>
+    </ClCompile>
+    <ClCompile Include="Nes\NES_PPU_Tile.cpp">
+      <Filter>NES</Filter>
+    </ClCompile>
+    <ClCompile Include="NES\NES_States.cpp">
+      <Filter>NES</Filter>
+    </ClCompile>
+    <ClCompile Include="Global.cpp" />
+    <ClCompile Include="NinthStar.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\Program Files\Microsoft Visual Studio\VC98\Include\d3dx8math.inl">
+      <Filter>Resource Files\Extern Dependencies</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="NinthStar.rc" />
+  </ItemGroup>
+</Project>

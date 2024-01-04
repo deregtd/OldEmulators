@@ -1,0 +1,685 @@
+<HTML>
+<HEAD>
+
+<TITLE>NES4PC - News Page</TITLE>
+
+<META NAME="keywords" CONTENT="NES Emulator, NES, Emulator, NES4PC">
+<META HTTP-EQUIV="description" CONTENT="NES4PC an NES Emulator for Windows 95/98/NT">
+<META NAME="AUTHOR" CONTENT="David de Regt (AkIlLa^)">
+<META NAME="GENERATOR" CONTENT="Leet MS-DOS Editor 5k111z">
+<META http-equiv="PICS-Label" content='(PICS-1.1 "http://www.rsac.org/ratingsv01.html" l gen true comment "RSACi North America Server" for "http://www.emuclassics.com/nes4pc/" on "1999.02.22T14:20-0800" r (n 0 s 0 v 0 l 1))'>
+
+</HEAD>
+<BODY TEXT="#00ff00" LINK="#0000ff" VLINK="#800080" BGCOLOR="#000000" TOPMARGIN=0 LEFTMARGIN=0>
+
+<FONT SIZE="3"><CENTER>
+<!--#exec cgi="/cgi-bin/bannerad.exe" --><BR>
+<IMG SRC="images/nes4pc.jpg" ALT="NES4PC"><HR WIDTH="30%">
+
+<a href="http://member.linkexchange.com/cgi-bin/fc/fastcounter-login?618420" target="_top"><img alt="Counter" border="0" src="http://fastcounter.linkexchange.com/fastcounter?618420+1236847"></a><HR WIDTH="30%">
+Current Version: <I><FONT COLOR="#00ff00">v0.35 Alpha 2!</FONT></I><HR WIDTH="30%">
+Next Version: <I><FONT COLOR="#00ff00">v0.35</FONT></I><BR>
+Projected Release Date: <I><FONT COLOR="#00ff00">As soon as SSNS is done</FONT></I><HR WIDTH="30%">
+</CENTER>
+
+<FONT COLOR="#00ffff" SIZE="+3">News:</FONT><P>
+
+<FONT COLOR="#2050e0" SIZE="+1">10/31/99:</FONT>
+<UL>
+<LI>
+Yes, I'm still alive.  NES4PC has not been dropped.  I finally got a freaking
+working directdraw core, that works in both windowed and full-screen, so I'll
+be able to add that soon.  <I got it working on a game that I'm writing, but
+the graphics engine follows the same pattern as my nes4pc engine, so it'll be
+a matter of copy/paste>  It will, however, require DirectX 7.0, so start up
+on your downloads of that. ;-)  I've been working on nes4pc, and frankly, I
+can't figure out what's wrong with the damn thing.  I've checked every part
+of it a million times over and I just can't find out why certain things don't
+work.  So I've decided to just focus on features like sound, game genie,
+save states, and video.  I've located the problem in the sound core and am
+working on fixing it by letting directsound do the mixing instead of having
+nes4pc do it.  I am also about to add directinput support, so the problem of
+suddenly losing control will disappear.
+</LI>
+</UL>
+
+<FONT COLOR="#2050e0" SIZE="+1">4/15/99:</FONT>
+<UL>
+<LI>
+Well, today I've been given the last straw to break my will to continue
+hacking together the current incarnation.  I don't believe that with my
+current emulation method that I will be able to implement correct SNSS save
+states...  My emulation method is also flawed in many other ways, a few of
+which being that the way I do name/attribute tables is just <U>wrong</U>, and
+that my cpu core, while easy to look at, is totally inefficient and makes
+converting routines to assembly near impossible.  It is the combination of
+these and a million other problems with NES4PC that has made me decide to
+simply release v0.35 as is, without directdraw (but with a partial directdraw
+core included but not used) and with only-works-on-NES4PC SNSS support (aka
+don't try it on other people's computers).  This weekend I will put together
+the final release package for v0.35 and then take as long as I need to rewrite
+my CPU core, Video core, GUI, mappers implementation, and a number of other
+things.  The release will include a limited source code, meaning that I won't
+include _EVERYTHING_, but I'll include enough that someone can easily use it
+for reference.  I originally planned to release the full source code in hopes
+that someone could help me fix some of the bugs, but I have come to realize
+that the only real fix is a rewrite, and so I will simply release enough to
+use as reference, but hopefully discouraging skript kiddies from replacing
+all text "NES4PC" with "LEETNES" or something and then releasing it as a "new
+emulator".
+</LI>
+<LI>
+Don't worry, this doesn't mean I'm going to stop development of NES4PC.  I
+simply want to have all the time I need to rewrite everything instead of
+keeping myself to a schedule and then constantly pushing it back.  I will
+continue to put up notices on the page regarding my progress on the rewrites
+as I complete a major step.  This is simply a major turning point for NES4PC.
+The new cpu core will be as accuate as current knowledge can make it, and as
+fast as my ASM skills can make it as well.  The debugger will be as good or
+possibly better than the old one.  Game Genie codes will work.  The graphics
+will be done with DirectDraw and will be easily configurable for either
+windowed mode or full screen, and will be stretchable in windowed mode.
+Mapper support will be fixed, expanded, and optimized.  Controllers will be
+done via DirectInput.  However this all takes time, and so I can't say how
+long it will take.  2 to 3 months for it all would be a good guess.  I may
+release something along the way to show what's been finished as well, so don't
+lose <I>all</I> hope!
+</LI>
+</UL>
+
+<FONT COLOR="#2050e0" SIZE="+1">4/13/99:</FONT>
+<UL>
+<LI>
+Well thanks to bpoint the DirectDraw core is fixed and moving right along.
+16-bit color and 24-bit color will be easy to add.  The hard part will be
+8-bit color.  In windowed mode, you cannot use directdraw to set a palette,
+and if you try to use the Windows API calls for manipulating palettes, then
+Windows GPFs, Blue Screns, then hangs.  So I'm probably going to use my GDI
+video core for 8-bit color and use DirectDraw for 16-bit, 24-bit, and 32-bit
+color.  Come to think of it, that would simplify my graphics core tremendously
+so I think that's what I'll do!
+</LI>
+<LI>
+Unfortunately, we in Nesdev are still working on finalizing SNSS, but it is
+very close to completion.  I'll tell you that there are at least two other
+NES emulators that have added SNSS and that are working with me on finalizing
+it; Nofredo and LoopyNES.  We want to wait until we have a good finished SNSS
+product before we all release new versions of our emulators.
+</LI>
+</UL>
+
+<FONT COLOR="#2050e0" SIZE="+1">3/29/99:</FONT>
+<UL>
+<LI>
+I'm really sorry I keep pushing the release date back.  With all the things I
+keep trying to add and with all the things going on outside of programming
+(StarCraft admittedly one of them...) I really haven't been able to put
+NES4PC into a releasable condition.  I'll give you the last status update
+before the release though.  Next week I have spring break, and will definitely
+release something during that week, since I'll have time to finish up all
+the things that I've been working on.  These include: save states (need to
+give the final draft a bit of aging time before I consider it accepted), a
+DirectDraw graphics engine (ohhh I am _SOO_ close to having this working...),
+getting the debugger put back in, and getting the source code in a releasable
+format.  As soon as I get these 4 things done, I'll release it.  It's really
+not as bad as it sounds.  Most of these shouldn't take more than a few hours
+of work each.
+</LI>
+<LI>
+Regarding the open source thing, could anyone that's truly interested in the
+source code email me saying both who they are and why they want the source? I
+mainly want to see how high the interest level is, and secondly want to see
+what it's gonna be used for so that I might be able to help you individually.
+</LI>
+<LI>
+And lastly, could the person who emailed me about the GDI graphics core please
+email me again?  I've looked through my email but I can't find the mail you
+sent me about it. =(
+</LI>
+</UL>
+
+<FONT COLOR="#2050e0" SIZE="+1">3/22/99:</FONT>
+<UL>
+<LI>
+The save state madness is almost over with.  Save states work perfectly, and
+we're just clearing up the final unified file format specifics in Nesdev. As
+soon as that's done and I finish cleaning up the interface I'll release v0.35.
+It won't nearly as good as I'd hoped for it, but I also didn't have as much
+time as I'd hoped to have either.  I'm also working on a directdraw graphics
+core, so as soon as I'm finished with that I'll add it to NES4PC for a huge
+speed boost.
+</LI>
+<LI>
+And about the open source code, I don't know if it's gonna be plain "open
+source"...  I think I'm gonna have to do something like "this code may not be
+modified without the permission of the author" and copyright it and stuff.
+With a lot of the emails I've gotten from people like "gimme the source" and
+that's the whole email, I really don't trust what'd happen if I just threw
+the source code up for grabs.  So the source code will still be released, I'm
+just trying to decide in what form and with how many limitations...
+</LI>
+<LI>
+Damn, didn't realize it'd been so long since i'd updated the page... =(
+</LI>
+</UL>
+
+<FONT COLOR="#2050e0" SIZE="+1">3/9/99:</FONT>
+<UL>
+<LI>
+Working on the Pong homebrew ROM gave me a few ideas as to some NES4PC bugs,
+and looking at Radracer confirmed them.  NES4PC has had huge graphics bugs
+since the very beginning.  v0.35 alpha 3 won't, however...  An example of the
+fixes is that the gameplay of RadRacer is 100% perfected. =)
+</LI>
+</UL>
+
+<FONT COLOR="#2050e0" SIZE="+1">3/8/99:</FONT>
+<UL>
+<LI>
+Well, I've been working on a Pong homebrewn ROM that was started by Johannes.
+As I work on the ROM more and more, I find that some things are just wierd
+about my emu or something. =)<P>
+
+For instance, what I have right now runs perfectly on NES4PC.  On the latest
+loopynes beta, it runs without the scores and with a few graphics glitches at
+the bottom of the screen.  On Nesticle, the graphics are entirely missing and
+you can just hear the sound. (The sound works right on all 3) <P>
+
+So I've decided to make NES4PC an open source project, in the hopes that it
+will help people learn from it, and in the hopes that someone can help me
+make it the best emulator that it can be.<P>
+
+All I ask by doing this is that anyone who uses my source either for
+reference gives me credit in their documentation, or anyone who uses blocks
+of the code notifies me via email what they're using.  I just want to make
+sure that noone's ripping off my hours and hours of work...<P>
+
+As soon as I get alpha 3 fixed (there are a number of bugs that I'm working
+on from new additions to the code), I will release it in the form of binaries
+and in the form of the full source code.<P>
+
+The source code is made in Borland C++ Builder v1.0, using the DirectX 6.1
+SDK for include files/lib files, although the DirectX 6.0 includes/libs work
+too.<P>
+
+If someone wants to port NES4PC, give it a shot and notify me via email
+so I can put up a link and add full info on your project.<P>
+
+If you find any bugs in the code, notify me via email as soon as you possibly
+can. =)  If you successfully add a mapper to the source code, tell me and I'll
+add it to the source code and give you full credit for it.<P>
+
+Lastly, I don't want anyone to, like, continue my work and just add on to my
+source code and start a new emulator with it.<P>
+
+I will continue the emulator same as before, I am just hoping that this will
+benefit both NES4PC and the community.
+</LI>
+</UL>
+
+<FONT COLOR="#2050e0" SIZE="+1">3/6/99:</FONT>
+<UL>
+<LI>
+Happy birthday to me!  Wohoo!
+</LI>
+<LI>
+Oh, and I added the awesome new logo finished by DaJudge.  Cool, eh? =)
+</LI>
+<LI>
+I'll be working on adding more mappers and speeding up the CPU core tomorrow.
+As for today, I have an indoor soccer game, tennis lessons, and birthday crap
+to deal with. =)
+</LI>
+<LI>
+I don't have enough done this weekend to warrant another alpha, but there
+have been wars raging in Nesdev over a standardized save state format.  So
+in the wake of it, I've added save state code and the only thing waiting is
+for the format to be standardized, the saving/loading code is all in there
+and working. =)
+</LI>
+</UL>
+
+<FONT COLOR="#2050e0" SIZE="+1">2/28/99:</FONT>
+<UL>
+<LI>
+I'll be away on a nice bond-building school retreat for the next three days
+(woo yeah.......) so I won't be able to work on NES4PC at all.  Sorry dewds
+and the countable-on-one-hand dewdettes out there. ^_^
+</LI>
+<LI>
+BTW, I forgot to mention in the NES4PC.TXT for the v0.35 alpha versions of
+NES4PC, I disabled the sound since it was really bad sounding, so you can stop
+emailing me saying "the sound isn't working."  Muh bad, sorry for the
+confusion!
+</LI>
+</UL>
+
+<FONT COLOR="#2050e0" SIZE="+1">2/26/99:</FONT>
+<UL>
+<LI>
+Updated the compatability list to reflect a few of the fixed games in the new
+version...
+</LI>
+<LI>
+I've decided to release v0.35 Alpha 2.  It has a lot more stuff new than the
+doc makes it look like.  The most major being that the debugger is currently
+_completely_ gone.  I killed it since it was really old and most of it was
+screwing up with the new cpu memory accessing code.  So basically as soon as
+I'm done converting the emulator over to a new format, I'll re-write the
+debugger.  But at least for now, it's a _lot_ faster without the debugger. =)
+</LI>
+<LI>
+I was doing some testing today, and found that a _lot_ of games that didn't
+use to work now work.  I think it has to do with me fixing that sprite 0 hit
+bug, but i have no idea. ^_^  Games like the hunt for red october (own it,
+awesome game), captain skyhawk (same), knight rider (same), and a whole host
+of others have all increased their compatability a large amount.  Knight
+Rider and Captain skyhawk stopped crashing, and THFRO went from not working
+at all to working perfectly!<BR>
+I've been fiddling with the mappers a bit now, and have CV3j (VRC6) working
+a little bit better...  The CHR errors are still present, tho...
+</LI>
+<LI>
+Wohoo!  Exams are over, and it's time to get back to work! ^_^
+</LI>
+</UL>
+
+<FONT COLOR="#2050e0" SIZE="+1">2/23/99:</FONT>
+<UL>
+<LI>
+As ml's logos start pouring in (about 3 more were waiting in my email box by
+the time I got home from school,) I started to wonder if I could get a good
+competition going between him and the other guy to see who could make the
+best logo. We'll have to see.  I think I'll rotate between the smaller logos
+sometimes for now. =)
+</LI>
+<LI>
+I have exams wednesday through friday, so I won't get much done on NES4PC...
+This'll probably be my last update until friday night or saturday.  Actually
+possibly thursday night, since friday I just have an easy math exam which I
+don't need to study for.  Wohoo! ^_^
+</LI>
+<LI>
+Right now, I'm working on the MMC1 code.  There seems to be a problem with the
+code for 256k page switching, and likely some other stuff, so games like
+Dragon Warrior 3 and 4 don't work right now. (Of course, DW1/2 don't work
+either, but that's another story...)<BR>
+Zelda 2's overworld map is also screwed up tile-wise, just like it was before
+it broke, so I'm trying to find out if it's a MMC1 error or if it's something
+in my sprite 0 hit code or my scanline engine or what... =/
+</LI>
+<LI>
+Well so far I've had two people make logos for me, so I don't need any more
+logos. ^_^<BR>
+The one currently up was made by <I><B>ml</B></I>, and I'm having a 3d-rendered
+one done by someone else.
+</LI>
+</UL>
+
+<FONT COLOR="#2050e0" SIZE="+1">2/22/99:</FONT>
+<UL>
+<LI>
+Ewps.  Fixed the bug in mapper 17.  It works now.  At least now I can feel
+like I accomplished <U>something</U> today. ^_^
+</LI>
+<LI>
+Man I'm just mapperman today.  I added mapper 17, but, yet again, that doesn't
+work either.  I'm not having any luck with these. =(
+</LI>
+<LI>
+After spending an hour or two with the linkexchange siteinspector, I managed
+to make my site a little bit better (according to siteinspector anyway ^_^).
+However I also made a little boo boo in the NES4PC text at the top.  Please
+forgive me for any ailments caused to you by this.
+</LI>
+<LI>
+I Updated the Links page.  I Added links to my NESEM page and to Shyguy's page.
+I also fixed the links to: Emunews, News-U-Lator, and Gameboy 98.
+</LI>
+<LI>
+I added mapper 16, and worked on mappers 15 and 91 a bit.  None of the 3 run
+anything yet, though. =/
+</LI>
+<LI>
+Anyone wanna make a logo for NES4PC?  If so, email me. =)
+</LI>
+</UL>
+<HR>
+
+<FONT COLOR="#2050e0" SIZE="+1">2/21/99:</FONT>
+<UL>
+<LI>
+Time for the weekly update!<P>
+
+So far I've converted a little bit more of the core to ASM, added two mappers
+(91, 23), and fixed a huge bug in the sprite 0 hit detection code, so now
+games like zelda 2 and rambo should be working.  I've also removed the debugger
+until I re-write it.  Too much of it was out of date and the functions were
+just bogging down the core at this point for much of it...  So right now it's
+REALLY hard to test new mappers n stuff, but at least it's really fast...
+The speed jumped from 57fps at 5 frame-skip to 60fps at 3 frame-skip on Mario 1,
+so it's a lot faster. =)<P>
+
+I should have an alpha 2 ready in the near future.  For now, test out alpha 1
+and tell me about anything that doesn't work on it that works on v0.30.<P>
+
+Thanks for your patience and continued support.  Don't worry, NES4PC will
+continue for a long time to come, and I hope to eventually have it as good as
+or better than BioNES!
+</LI>
+</UL>
+<HR>
+
+<FONT COLOR="#2050e0" SIZE="+1">2/13/99:</FONT>
+<UL>
+<LI>
+Whoops... The first upload had a little bug... If you downloaded it within the
+first hour of it going up, please re-download it. =)
+</LI>
+<LI>
+Just to show you all that I'm not sitting around on my ass doing nothing,
+and that I _do_ have some progress since the last version, I'm releasing
+v0.35 Alpha 1...  It's got a few of the things that will be refined for
+the final version.  However there are a lot of bugs, and you'll notice a
+major one if you play Mario 1 on it. =)
+</LI>
+<LI>
+On a side note, at my programming job they've taught me to use the oscilloscope
+that they have, a nice $20,000 one, and I took a look at my emulator's sound
+output on it.... No wonder it sounds like shit!  The sound looks more like
+triangle waves than square waves! =P  So I'll be using that to test out mods
+to my sound core periodically.  Hopefully I should get better-sounding sound
+for v0.35 final. =)
+</LI>
+<LI>
+I added a link to Emulation Excellence.  If you wade through the ads enough
+you might find his page. =)
+</LI>
+</UL>
+<HR>
+
+<FONT COLOR="#2050e0" SIZE="+1">2/5/99:</FONT>
+<UL>
+<LI>
+Yet again, sorry it's been so long since I updated... My life's been really
+busy.  I've been working on the emu, and the new memory functions are done,
+making mapper games run faster but mapper 0 games and a few mappered games
+run slower.  To counteract this, I'm working on a new CPU core coded entirely
+in assembly.  The initial cpu core after the new memory core ran 50fps on my
+computer, now it goes around 57fps, and I've only converted 5 lines of c++
+code to asm... can't wait until i redo the whole thing... It's gonna be a
+while until v0.35, but I think it'll be a huge leap...  The interface will
+be cleaned of all outdated functions, the options window will save the
+settings, I might even have more sound channels...  More mappers will work,
+it'll be fast as hell, I'll prolly have directdraw...  Well yeah.  Just keep
+your socks on and wait for it.  Until then, use v0.30. =)
+</LI>
+</UL>
+<HR>
+
+<FONT COLOR="#2050e0" SIZE="+1">1/20/99:</FONT>
+<UL>
+<LI>
+Sorry it's been so long since I updated the page, but I've been kinda busy...
+I had to reformat my HD last weekend and I'm still trying to get the DirectX
+6.0 LIB/H files to let me compile the emulator, since I can't even compile it
+without those files.  However, before I reformatted, I had gotten much done.
+The current version has a new set of memory access routines.  They make mapper
+0 games run a little slower, but make most mapper games run a LOT faster.  I
+also have added a few more mappers including the MK4/TEKKEN2 hack mapper.  I'll
+try to keep the site updated better as the emulator gets back into the swing
+of things!
+</LI>
+</UL>
+<HR>
+
+<FONT COLOR="#2050e0" SIZE="+1">1/1/99:</FONT>
+<UL>
+<LI>I stayed up almost all night and had a spontaneous burst of quickass
+programming that happened to magically work!  So I decided that v0.30 was
+ready for release, and so it is!  NES4PC v0.30 is released!  Yay! =)</LI>
+<LI>Happy new year!!!</LI>
+</UL>
+<HR>
+
+<FONT COLOR="#2050e0" SIZE="+1">12/31/98:</FONT>
+<UL>
+<LI>The compatability list has been updated</LI>
+<LI>Well I was planning on a January 1st release of v0.30, but I decided that
+it just wasn't ready.  There's an ugly crash bug somewhere, the new mappers
+aren't perfected, the debugger is in shambles, there's debug code all over,
+and I just don't wanna stay up for the next 24 hours straight to have it
+released at 11:59pm on January 1st. =)</LI>
+<LI>Updated the <A HREF="files/index.html">Beta Page</A> with the latest WIP
+of v0.30, which has a lotta fixed bugs!</LI>
+</UL>
+<HR>
+
+<FONT COLOR="#2050e0" SIZE="+1">12/22/98:</FONT>
+<UL>
+<LI>Well I dunno how long it's been like this, but the page has been screwed
+up for a while now... Now it's fixed.</LI>
+<LI>Updated <A HREF="files/index.html">Beta Page</A> with the latest WIP of
+v0.30, which has fixed mapper 1, and multiple fixed bugs!</LI>
+</UL>
+<HR>
+
+<FONT COLOR="#2050e0" SIZE="+1">12/16/98:</FONT>
+<UL>
+<LI><FONT SIZE="+1">NES4PC v0.251 Relased!</FONT>  I was notified of a bug.  Somehow this one slipped through my beta testing...</LI>
+<LI><FONT SIZE="+1">NES4PC v0.25 Relased!</FONT>  This is a <I>major</I> advance in NES4PC's development!</LI>
+<LI>Page moved to emuclassics!</LI>
+<LI>Tons more bugs fixed in local version.  v0.25 Final Beta enters beta
+testing.  Hopefully, this will be the final beta before the release.</LI>
+</UL>
+<HR>
+
+<FONT COLOR="#2050e0" SIZE="+1">12/15/98:</FONT>
+<UL>
+<LI>Updated the screenshots page!</LI>
+<LI>Mario 1 plays perfectly and FF3 plays something now as well (on the local
+copy).  For the lastest unsupported beta, go to <A HREF="files/index.html">the
+beta page</A>. =)</LI>
+<LI>Well, I'm sorry, but NES4PC was in such a state of disarray with the stuff
+that I've been working on that I just couldn't get a final release ready.
+However, I will definitely have one ready before christmas.  Likely around the
+20th.</LI>
+</UL>
+<HR>
+
+<FONT COLOR="#2050e0" SIZE="+1">12/11/98:</FONT>
+<UL>
+<LI>Mapper 7 Support Fixed!</LI>
+<LI>Compatability List Updated</LI>
+</UL>
+<HR>
+
+<FONT COLOR="#2050e0" SIZE="+1">12/11/98:</FONT>
+<UL>
+<LI>After spending long hours tweaking IRQs, FF1 works, as well as FF2, and
+god knows how many others!</LI>
+</UL>
+<HR>
+
+<FONT COLOR="#2050e0" SIZE="+1">12/6/98:</FONT>
+<UL>
+<LI>Thanks to the Gameboy 98 guy, I now have pulse channels 1 & 2 done with
+DirectSound!  YAY!!!</LI>
+<LI>Working on Zapper accuracy still...</LI>
+</UL>
+<HR>
+
+<FONT COLOR="#2050e0" SIZE="+1">12/2/98:</FONT>
+<UL>
+<LI>Screenshots finally updated! =)</LI>
+<LI>Compatability list updated</LI>
+<LI>Zapper fully implemented into v0.25!!!</LI>
+</UL>
+<HR>
+
+<FONT COLOR="#2050e0" SIZE="+1">11/30/98:</FONT>
+<UL>
+<LI>Soon, we'll be moving over to the Emuclassics domain.  I'm currently
+working out the site details with the webmaster there.</LI>
+<LI>The next version of NES4PC is coming along nicely.  So far, I've fixed
+mapper 3 so that now games like paperboy, dragon quest 1, and gradius work.
+I've also added a new scanline-based engine, which I am now optimizing, which
+is faster than both the tile-based engine and the screen-based engine, AND it
+does scrolling easily!  There are a lot of other neat things that I've added,
+but those are the highlights.</LI>
+<LI>I just added news-u-lator to the links page.</LI>
+</UL>
+<HR>
+
+<FONT COLOR="#2050e0" SIZE="+1">11/29/98:</FONT>
+<UL>
+<LI>As we head into chilly December, I have an announcement.  My email addy is
+changing! Eeeeeekkk!  Yeah, my new email is <A HREF="mailto:akilla@earthlink.net">
+akilla@earthlink.net</A>.</LI>
+<LI>I'm hard at work fixing the graphic bugs from v0.20</LI>
+</UL>
+<HR>
+
+<FONT COLOR="#2050e0" SIZE="+1">11/27/98:</FONT>
+<UL>
+<LI>Thanks goes out to vipor for deciding to be the person who does all my
+compatability reports. =)  It's a big help so thanks a lot!  The compatability
+list should be updated frequently now, and possibly with screenshots in the
+future!</LI>
+</UL>
+<HR>
+
+<FONT COLOR="#2050e0" SIZE="+1">11/26/98:</FONT>
+<UL>
+<LI>Well, since I immediately got a few compatability reports, I put those
+up. =)</LI>
+<LI>Well, I noticed TMT has an autodetect-browser page so I copied that in
+so now it should autodetect your browser and give you the appropriate NES4PC
+page!</LI>
+<LI>Added "TOO MUCH TANG" to the links page.  It's a pretty kewl news page.</LI>
+<LI>Any chance you guys can send in compatability emails for how v0.20 runs?
+=)</LI>
+<LI><FONT SIZE="+1">v0.20 has been released!  Check the download page for it and
+check the version page to see what's new.  Screenshots will be posted later
+today OR in a few days, whenever I find time.</FONT></LI>
+<LI>NE1 wanna make a logo for NES4PC?  You'll get full credit on the homepage
+and in the NES4PC executable if you do. =)</LI>
+<LI>I just fixed the simple (netscape) version of the page, so it should be
+completely correct in netscape now. =)</LI>
+</UL>
+<HR>
+
+<FONT COLOR="#2050e0" SIZE="+1">11/24/98:</FONT>
+<UL>
+<LI>Finally finished this tile-based drawing engine.  Elite runs a lot better,
+but I think my timing cycles are still somewhat off.  It's also a lot slower.
+I think for this release I'm gonna have an option of either tile-based or
+screen-based.  Currently tile-based is about 1/4-2/5 as fast as the screen-
+basec engine.  AKA yikes.  I'm gonna have to fiddle with my cycle settings
+manually to get this to work... *much grumbling*...  Oh joy, 2:15am.  Now I
+get to wake up in 4 hours and after 1 hour of studying, take my exam.  See
+what I do for you???  Sigh...</LI>
+</UL>
+<HR>
+
+<FONT COLOR="#2050e0" SIZE="+1">11/24/98:</FONT>
+<UL>
+<LI>Even though I should have been studying for my exam, the call to program
+overcame me, and I was drawn in...  I programmed sprite 0 hits and a ton of
+cpu accuracy bug fixes.  Zapper is also almost completely working in Duck
+Hunt.  I <B>WILL</B> have v0.20 out by Thanksgiving and probably a few days
+early.  It won't have all the features listed as "look for in next version",
+but most of those won't be implemented for a few versions anyway.  My main
+concerns for now are getting the compatability up, finishing the zapper, and
+getting a scanline-based and/or a tile-based engine working.  Check the
+"Version Info" page for progress info.  Once I get a scanline-based or
+tile-based engine working, Elite will run!  That looks like an awesome game,
+and I wanna know how he managed to get that 3d engine working so well on the
+NES. =)</LI>
+<LI>Last exam tomorrow then I have 4.5 free days to program!  Yippee!</LI>
+<LI>I gave up on trying to get this page to look right in Netscape and just
+made a quick simpler version of the page that just has the menu at the top
+in one frame and the target for it in the bottom frame.  The link to it is on
+the <A HREF="index.html" TARGET="_top">Start Page</A>.</LI>
+<LI>At my dad's request, I lowered the listed information in the "About the
+Author" page.</LI>
+</UL>
+<HR>
+
+<FONT COLOR="#2050e0" SIZE="+1">11/23/98:</FONT>
+<UL>
+<LI>Also, in case you didn't know, there are screenshots up. =)</LI>
+<LI>I optimized the page.  You used to have to load 17 html files to get the
+basic page loaded.  Now it's down to 7, which is the best I can get it down
+to short of taking the left and right bars and making them a background image
+for the main pages. =)  But in any event, this should: save memory/hard disk
+space on your computer, save hard disk space on my computer, save web page
+space, speed page load times, and finally, should make those stupid
+"Invalid Response" errors go away. =)</LI>
+<LI>I've worked out some routines for much better
+CPU/PPU timing, so the next release should have sprite 0 hit/mid-hblank VRAM
+writes/accurate h-&v-blank timing, and either a scanline-based engine or a
+tile-based engine, I'd have to see how accurate the tile-based engine is when
+compared to the scanline-based engine.
+</UL>
+<HR>
+
+<FONT COLOR="#2050e0" SIZE="+1">11/21/98:</FONT>
+<UL>
+<LI>SRAM Fully Implemented!  Fast SRAM routines finally created.  SRAM files
+should be interchangable with Nesticle SRAM files and whatever other emus are
+also compatable with SAV files, so you might as well just stick NES4PC in the
+same directory as Nesticle and those other emus and all use the same SAV
+files.</LI>
+</UL>
+<HR>
+
+<FONT COLOR="#2050e0" SIZE="+1">11/20/98:</FONT>
+<UL>
+<LI>Mapper #1 fully fixed!  Screenshots of mapper #1 games will be up as soon
+as I have time to make some.</LI>
+</UL>
+<HR>
+
+<FONT COLOR="#2050e0" SIZE="+1">11/19/98:</FONT>
+<UL>
+<LI>I decided to change v0.15 Public Beta 1 to just Public Beta, and am making
+v0.20 the landmark version.  This will make it easier to track private and
+public beta tests for me and will make it easier to release more public betas
+for you.</LI>
+<LI>Updated Version Info page for v0.15 Public Beta stats</LI>
+<LI>Added mirror for v0.15 Public Beta</LI>
+<LI>v0.15 Public Beta Released!!!  This is a public beta, but has
+many of the features already completed that will be in v0.20.  The big news
+here is that I chanced upon a quick as heck way to do
+8-bit graphics.  8-bit graphics is approximately 1.7-2 times as fast as the
+16-bit and 24-bit modes.  Do not email me with any bug reports on this version
+unless you think you know how to fix it!  Any unconstructive criticism via
+email will be deleted without a reply.</LI>
+<LI>The new page goes up today!  Yay!!!</LI>
+</UL>
+<HR>
+
+<FONT COLOR="#2050e0" SIZE="+1">11/18/98:</FONT>
+<UL>
+<LI>Last night, I spent 30 mins on the general design of the new page, on
+paper, and I spent all my free time today bringing it into being.  Hope you
+like it!  It took a heck of a long time getting the frames and graphics
+aligned perfectly.  <A HREF="mailto:akilla@earthlink.net">Mail me</A> with any
+comments on it.  The page should barely fit at 640x480 resolution, which is
+why it's set to be so small.  If it doesn't fit, tell me so I can give a few
+extra pixels leeway.  I also haven't tested it in netscape, so if it doesn't
+work in that, <I>DEFINITELY</I> tell me!</LI>
+<LI>I finally finished writing the "The Author" page.  I went a bit overboard
+on the autobiography part, but you might wanna read it to know a bit more
+about me if you're curious about that kind of thing.  Too many people have
+asked me things like the stuff on there that I decided I might as well write
+a detailed page that I can just refer them to while have it be the contact
+info for my emulator as well.</LI>
+</UL>
+<HR>
+<FONT SIZE="1">This page written by David de Regt using MS-DOS Editor, brain power, and a lot of time!</FONT><BR>
+<font face="arial" size="1"><a href="http://www.fastcounter.com/fc-join" TARGET="_top">FastCounter by LinkExchange</a></font>
+</FONT>
+</BODY>
+</HTML>

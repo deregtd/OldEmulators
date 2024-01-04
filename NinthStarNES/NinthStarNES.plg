@@ -1,0 +1,69 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: NinthStar - Win32 Release--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\RSP174.tmp" with contents
+[
+/nologo /G6 /ML /GX /O2 /Ob2 /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_MBCS" /FAs /Fa"Release/" /FR"Release/" /Fp"Release/NinthStarNES.pch" /Yu"stdafx.h" /Fo"Release/" /Fd"Release/" /FD /c 
+"C:\C++\NinthStarNES\NES\NES_PPU_Pixel.cpp"
+]
+Creating command line "cl.exe @C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\RSP174.tmp" 
+Creating temporary file "C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\RSP175.tmp" with contents
+[
+kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib d3d8.lib dinput8.lib dxguid.lib dsound.lib /nologo /subsystem:windows /profile /machine:I386 /out:"Release/NinthStarNES.exe" 
+".\Release\StdAfx.obj"
+".\Release\2A03.obj"
+".\Release\NES.obj"
+".\Release\NES_APU.obj"
+".\Release\NES_Controllers.obj"
+".\Release\NES_Debugger.obj"
+".\Release\NES_GFX.obj"
+".\Release\NES_Handlers.obj"
+".\Release\NES_PPU.obj"
+".\Release\NES_PPU_Pixel.obj"
+".\Release\NES_PPU_Scanline.obj"
+".\Release\NES_PPU_Tile.obj"
+".\Release\NES_States.obj"
+".\Release\Global.obj"
+".\Release\NinthStar.obj"
+".\Release\NinthStar.res"
+]
+Creating command line "link.exe @C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\RSP175.tmp"
+<h3>Output Window</h3>
+Compiling...
+NES_PPU_Pixel.cpp
+C:\C++\NinthStarNES\NES\NES_PPU_Pixel.cpp(420) : error C2094: label 'Draw1' was undefined
+Error executing cl.exe.
+Creating temporary file "C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\RSP176.tmp" with contents
+[
+/nologo /o"Release/NinthStarNES.bsc" 
+".\Release\StdAfx.sbr"
+".\Release\2A03.sbr"
+".\Release\NES.sbr"
+".\Release\NES_APU.sbr"
+".\Release\NES_Controllers.sbr"
+".\Release\NES_Debugger.sbr"
+".\Release\NES_GFX.sbr"
+".\Release\NES_Handlers.sbr"
+".\Release\NES_PPU.sbr"
+".\Release\NES_PPU_Pixel.sbr"
+".\Release\NES_PPU_Scanline.sbr"
+".\Release\NES_PPU_Tile.sbr"
+".\Release\NES_States.sbr"
+".\Release\Global.sbr"
+".\Release\NinthStar.sbr"]
+Creating command line "bscmake.exe @C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\RSP176.tmp"
+Creating browse info file...
+<h3>Output Window</h3>
+
+
+
+<h3>Results</h3>
+NinthStarNES.exe - 1 error(s), 0 warning(s)
+</pre>
+</body>
+</html>

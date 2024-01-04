@@ -1,0 +1,618 @@
+//---------------------------------------------------------------------------
+#include <vcl\vcl.h>
+#include <winbase.h>
+#include <mem.h>
+#include <io.h>
+#pragma hdrstop
+
+#include "main.h"
+#include "audio.h"
+
+//#define NewP
+//---------------------------------------------------------------------------
+#pragma resource "*.dfm"
+TStartFrm *StartFrm;
+//---------------------------------------------------------------------------
+extern struct _SNDChan SNDChannels[5];
+
+extern FILE * SRAMFileRd, * SRAMFileWr;
+bool Debugger = false;
+bool Autoframeskip;
+int Autoframeskipmax, FPSnum;
+
+int JP1A = 0x5A,JP1B = 0x58,JP1Select = 0x43,JP1Start = 0x56,JP1Up = 0x26,JP1Down = 0x28,
+	JP1Left = 0x25,JP1Right = 0x27,CoinIns = 112,JP2A =  82,JP2B = 84,JP2Select = 87,
+	JP2Start = 69,JP2Up = 85,JP2Down = 74,JP2Left = 72,JP2Right = 75;
+
+extern bool BkPTA, DebuggingTrace, DebuggingRegs, PPUAdrI, CPURunning, TUMode, TakeSnap,
+			VBlankOcc, ROMTrainer, BGVis, SprVis, SoundEnabled, HaltOnBadOp, HaltOnNMI,
+			SSize, BkPTA, SpPTA, NMIonVBlank, Spr0Occ, VBlanking;
+extern BYTE GraphicsEngine, curframe, NearestPalEntry[68], BMParray[983040], X, Y, SP;
+extern short int YMax, ScanLine, VBScanLine;
+extern LBYTE PC, NTabAdr;
+extern int frameskip, VBSec, Clockticks, VBCount, coldepth, LineTickCountInt;
+extern COLORREF /*BGCol,*/ Palette[68];
+
+extern M22in1St M22in1;
+extern MemSt Mem;
+
+#ifdef NewP
+extern BYTE P;
+#else
+extern CCRSt CCR;
+#endif
+
+extern JoypadSt Joy;
+extern PulseChanSt PulseChan[2];
+
+bool MapperSupport[256] = {
+//0		1	  2		3	  4		5	  6		7	  8		9
+ true, true, true, true, true,false,false, true, true, true,	//00-09
+ true, true,false,false,false, true,false,false,false,false,	//10-19
+false,false,false,false, true,false,false,false,false,false,	//20-29
+false,false,false,false, true,false,false,false,false,false,	//30-39
+false,false,false,false,false,false,false,false,false,false,	//40-49
+false,false,false,false,false,false,false,false,false,false,	//50-59
+false,false,false,false, true,false, true,false,false,false,	//60-69
+false, true,false,false,false,false,false,false,false,false,	//70-79
+false,false,false,false,false,false,false,false,false,false,	//80-89
+false,false,false,false,false,false,false,false,false, true,	//90-99
+false,false,false,false,false,false,false,false,false,false,	//100-109
+false,false,false,false, true,false,false,false,false,false,    //110-119
+false,false,false,false,false,false,false,false,false,false,	//120-129
+false,false,false,false,false,false,false,false,false,false,	//130-139
+false,false,false,false,false,false,false,false,false,false,	//140-149
+false,false,false,false,false,false,false,false,false,false,	//150-159
+false,false,false,false,false,false,false,false,false,false,	//160-169
+false,false,false,false,false,false,false,false,false,false,	//170-179
+false,false,false,false,false,false,false,false,false,false,	//180-189
+false,false,false,false,false,false,false,false,false,false,	//190-199
+false,false,false,false,false,false,false,false,false,false,	//200-209
+false,false,false,false,false,false,false,false,false,false,	//210-219
+false,false,false,false,false,false,false,false,false,false,	//220-229
+ true,false,false,false,false,false,false,false,false,false,	//230-239
+false,false,false,false,false,false,false,false,false,false,	//240-249
+false,false,false,false,false,false								//250-255
+};
+extern AnsiString MapperInfo[100];
+extern BYTE addressmode[256], instruc[256], bytes[256], ticks[256];
+//---------------------------------------------------------------------------
+LARGE_INTEGER ClockFreq;
+long ClockFreqVblank;
+//---------------------------------------------------------------------------
+void __fastcall TStartFrm::EmulationStartClick(TObject *Sender)
+{
+//	Timer1->Enabled = true;
+	if (CPURunning)
+	{
+		CPURunning = false;
+		PauseAudio();
+		return;
+	}
+
+	CPURunning = true;
+	ResumeAudio();
+	if (Debugger)
+	{
+		BYTE opcode;
+		while (CPURunning)
+		{
+			while ((Clockticks < LineTickCountInt) && (CPURunning)) {
+				opcode = *Mem.Main[PC];
+				Addrmode((BYTE) addressmode[opcode]);
+				PC += bytes[opcode];
+				ExecOp((BYTE) instruc[opcode]);
+				Clockticks += ticks[opcode];
+//				exec6502();
+				UpdateUI();
+			}
+			HBlank();
+		}
+	} else {
+		exec6502();
+	}
+	PauseAudio();
+}
+void __fastcall TStartFrm::EmulationResetClick(TObject *Sender)	{ PauseAudio(); CPURunning = false; reset6502(); UpdateUI(); }
+
+void __fastcall TStartFrm::FileOpenClick(TObject *Sender)
+{
+	CPURunning = false;
+	PauseAudio();
+	if (OpenDialog1->Execute())
+	{
+		BYTE romctrl;
+		int PRGLowAddr, CHRAddr;
+		FILE * in = fopen(OpenDialog1->FileName.c_str(), "rb");
+
+		char TmpDDFix[9];;
+		fseek(in, 7, 0); fread(&TmpDDFix[0],1,9,in);
+		bool DDHead = (AnsiString(TmpDDFix) == AnsiString("DiskDude!"));
+		if (DDHead)
+		{
+			Application->MessageBox("Diskdude-header found, attempting to fix...", "Error: Diskdude Was Born", MB_OK);
+			FILE * out = fopen(OpenDialog1->FileName.c_str(), "r+");
+			setmem(&TmpDDFix[0],9,0x00);
+			fseek(out, 7, 0); fwrite(&TmpDDFix[0],1,9,out);
+			fclose(out);
+		}
+
+		fseek(in, 6, 0); fread(&romctrl,1,1,in);
+		if (Mem.SRAMEnabled)
+		{
+			WriteSRAM();
+			fclose(SRAMFileWr);
+			fclose(SRAMFileRd);
+		}
+		Mem.SRAMEnabled = bit1(romctrl);
+		ROMTrainer = bit2(romctrl);
+		if (bit0(romctrl))
+		{
+			Mem.UpdateNameTablePointers(0, 1, 0, 1);
+		} else {
+			if (bit3(romctrl))
+			{
+				Mem.UpdateNameTablePointers(0, 1, 2, 3);
+			} else {
+				Mem.UpdateNameTablePointers(0, 0, 2, 2);
+			}
+		}
+		Mem.MapperNum = (BYTE) ((romctrl & 0xF0) >> 4);
+		BYTE romctrl2 = romctrl;
+		fseek(in, 7, 0); fread(&romctrl,1,1,in);
+		Mem.MapperNum |= (BYTE) (romctrl & 0xF0);
+		if ((DDHead) && (Mem.MapperNum > 15)) Mem.MapperNum -= (BYTE) 64;
+		if (Mem.MapperNum == 10) Mem.MapperNum--;
+		fseek(in, 4, 0); fread(&Mem.PRGPages,1,1,in);
+		fseek(in, 5, 0); fread(&Mem.CHRPages,1,1,in);
+		if (Debugger)
+		{
+			tprinto(AnsiString("Filename: ") + OpenDialog1->FileName);
+			tprinto(AnsiString("SRAM: ") + AnsiString((Mem.SRAMEnabled) ? "Yes" : "No"));
+			tprinto(AnsiString("Trainer: ") + AnsiString((ROMTrainer) ? "Yes" : "No"));
+			tprinto(AnsiString("Mirroring: ") + AnsiString((bit0(romctrl2)) ? "Vertical" : (bit3(romctrl2)) ? "Four-Screen" : "Horizontal"));
+			tprinto(AnsiString("Mapper #") + AnsiString(Mem.MapperNum) + AnsiString(" (") + MapperInfo[Mem.MapperNum] + AnsiString(", ") + AnsiString((MapperSupport[Mem.MapperNum]) ? "Supported" : "Not Supported") + AnsiString(")"));
+			tprinto(AnsiString("PRG/CHR Pages: ") + AnsiString(Mem.PRGPages) + AnsiString("/") + AnsiString(Mem.CHRPages));
+			tprinto(AnsiString("-------------"));
+		}
+		if (!MapperSupport[Mem.MapperNum])
+		{
+			fclose(in);
+			Application->MessageBox("This game's mapper is not supported!", "Error: Mappers", MB_OK);
+			return;
+		}
+		Application->ProcessMessages();
+
+		AnsiString tmpfile = OpenDialog1->FileName;
+		tmpfile.Delete(tmpfile.Length() - 2,3);
+		tmpfile += "sav";
+		if ((Mem.SRAMEnabled) || (Mem.MapperNum == 4))
+		{
+			if (access(tmpfile.c_str(),0) == -1)
+			{
+				unsigned char blah = 0;
+				SRAMFileWr = fopen(tmpfile.c_str(),"w");
+				for (int xx=0;xx<0x2000;xx++) fputc(blah, SRAMFileWr);
+				fclose(SRAMFileWr);
+			}
+			SRAMFileRd = fopen(tmpfile.c_str(),"rb");
+			SRAMFileWr = fopen(tmpfile.c_str(),"rb+");
+		}
+		if (Mem.SRAMEnabled) { ReadSRAM(); }
+
+		Mem.PRGPagesA = (LBYTE) (Mem.PRGPages << 1);
+		Mem.CHRPagesA = (LBYTE) (Mem.CHRPages << 3);
+
+		if (bit0(Mem.PRGPagesA-1)) Mem.PRGBitMask = 0x01;
+		if (bit1(Mem.PRGPagesA-1)) Mem.PRGBitMask = 0x03;
+		if (bit2(Mem.PRGPagesA-1)) Mem.PRGBitMask = 0x07;
+		if (bit3(Mem.PRGPagesA-1)) Mem.PRGBitMask = 0x0F;
+		if (bit4(Mem.PRGPagesA-1)) Mem.PRGBitMask = 0x1F;
+		if (bit5(Mem.PRGPagesA-1)) Mem.PRGBitMask = 0x3F;
+		if (bit6(Mem.PRGPagesA-1)) Mem.PRGBitMask = 0x7F;
+		if (bit7(Mem.PRGPagesA-1)) Mem.PRGBitMask = 0xFF;
+		if (bit8(Mem.PRGPagesA-1)) Mem.PRGBitMask = 0x1FF;
+		if (bit9(Mem.PRGPagesA-1)) Mem.PRGBitMask = 0x3FF;
+		if (bit10(Mem.PRGPagesA-1)) Mem.PRGBitMask = 0;
+
+		if (bit0(Mem.CHRPagesA-1)) Mem.CHRBitMask = 0x01;
+		if (bit1(Mem.CHRPagesA-1)) Mem.CHRBitMask = 0x03;
+		if (bit2(Mem.CHRPagesA-1)) Mem.CHRBitMask = 0x07;
+		if (bit3(Mem.CHRPagesA-1)) Mem.CHRBitMask = 0x0F;
+		if (bit4(Mem.CHRPagesA-1)) Mem.CHRBitMask = 0x1F;
+		if (bit5(Mem.CHRPagesA-1)) Mem.CHRBitMask = 0x3F;
+		if (bit6(Mem.CHRPagesA-1)) Mem.CHRBitMask = 0x7F;
+		if (bit7(Mem.CHRPagesA-1)) Mem.CHRBitMask = 0xFF;
+		if (bit8(Mem.CHRPagesA-1)) Mem.CHRBitMask = 0x1FF;
+		if (bit9(Mem.CHRPagesA-1)) Mem.CHRBitMask = 0x3FF;
+		if (bit10(Mem.CHRPagesA-1)) Mem.CHRBitMask = 0;
+
+		PRGLowAddr = 0x10 | (ROMTrainer << 9);
+		CHRAddr = PRGLowAddr + Mem.PRGPages*0x4000;
+
+		if (ROMTrainer) { fseek(in, 16, 0); fread(Mem.Main[0x7000], 1, 0x200, in); }
+
+		if (Mem.MapperNum == 230) M22in1.Resets = 0;
+
+		setmem(&Mem.PRGPage[0][0],0x80*0x2000,0x00);
+		for (int i=0;i<Mem.PRGPages*2;i++)
+		{ fseek(in, PRGLowAddr + i*0x2000, 0); fread(&Mem.PRGPage[i][0x0000], 1, 0x2000, in); }
+		setmem(&Mem.CHRPage[0][0],0x200*0x400,0x00);
+		for (int i=0;i<Mem.CHRPages*8;i++)
+		{ fseek(in, CHRAddr + i*0x400, 0); fread(&Mem.CHRPage[i][0x0000], 1, 0x400, in); }
+
+		fclose(in); HardBoot(); UpdateUI();
+	}
+}
+
+void __fastcall TStartFrm::FrameskipSliderClick(TObject *Sender, TUDBtnType Button)
+{ frameskip = FrameskipSlider->Position; }
+void __fastcall TStartFrm::About1Click(TObject *Sender)
+{ AboutWindow->Show(); }
+void __fastcall TStartFrm::Options1Click(TObject *Sender)
+{ OptionsForm->Show(); }
+void __fastcall TStartFrm::UpdateVideoMode1Click(TObject *Sender)
+{ UpdateVideoMode(); }
+void __fastcall TStartFrm::StartFrmShow(TObject *Sender)
+{
+	Autoframeskip = OptionsForm->AutoFS->Checked;
+	Autoframeskipmax = OptionsForm->AutoFSMax->Position;
+	frameskip = FrameskipSlider->Position;
+	HaltOnBadOp = HaltonBadOpcode1->Checked;
+	Setup(StartFrm, DebugForm, StartFrm->TracerInfo, StartFrm->StatusInfo);
+	NewCPUMode(NTSC1->Checked);
+
+	QueryPerformanceFrequency(&ClockFreq);
+	ClockFreqVblank = (int) (ClockFreq.QuadPart / 60);
+
+	SoundEnabled = OptionsForm->SndEnabledCheck->Checked;
+
+	if (Screen1->Checked == true) GraphicsEngine = 0;
+	if (Tile1->Checked == true) GraphicsEngine = 1;
+	if (Scanline1->Checked == true) GraphicsEngine = 2;
+
+	if (Debugger)
+	{
+		StartFrm->Width = 722;
+		StartFrm->Height = 456;
+		TimingForm->Show();
+	} else {
+		StartFrm->ClientWidth = 256;
+		StartFrm->ClientHeight = 240;
+		TimingForm->Hide();
+	}
+}
+
+void __fastcall TStartFrm::FileExitClick(TObject *Sender)
+{ Shutdown(); Application->Terminate(); }
+
+void __fastcall TStartFrm::PAL1Click(TObject *Sender)
+{ PAL1->Checked = true; NewCPUMode(false); }
+void __fastcall TStartFrm::NTSC1Click(TObject *Sender)
+{ NTSC1->Checked = true; NewCPUMode(true); }
+void __fastcall TStartFrm::StartFrmDestroy(TObject *Sender)	{ FileExitClick(NULL); }
+void __fastcall TStartFrm::StartFrmClose(TObject *Sender, TCloseAction &Action)	{ FileExitClick(NULL); }
+__fastcall TStartFrm::TStartFrm(TComponent* Owner) : TForm(Owner) { }
+//---------------------------------------------------------------------------
+//Controller Routines
+//---------------------------------------------------------------------------
+void __fastcall TStartFrm::KeyDownEv(TObject *Sender, WORD &Key, TShiftState Shift)
+{
+	if (Key == CoinIns)				Joy.CoinInsert = true;
+	if (Joy.type[0] == jpJoypad)
+	{
+		if (Key == JP1A)				Joy.Bits[0][0] = true;
+		else if (Key == JP1B)			Joy.Bits[0][1] = true;
+		else if (Key == JP1Select)		Joy.Bits[0][2] = true;
+		else if (Key == JP1Start)		Joy.Bits[0][3] = true;
+		else if (Key == JP1Up)			Joy.Bits[0][4] = true;
+		else if (Key == JP1Down)		Joy.Bits[0][5] = true;
+		else if (Key == JP1Left)		Joy.Bits[0][6] = true;
+		else if (Key == JP1Right)		Joy.Bits[0][7] = true;
+	}
+	if (Joy.type[1] == jpJoypad)
+	{
+		if (Key == JP2A)				Joy.Bits[1][0] = true;
+		else if (Key == JP2B)			Joy.Bits[1][1] = true;
+		else if (Key == JP2Select)		Joy.Bits[1][2] = true;
+		else if (Key == JP2Start)		Joy.Bits[1][3] = true;
+		else if (Key == JP2Up)			Joy.Bits[1][4] = true;
+		else if (Key == JP2Down)		Joy.Bits[1][5] = true;
+		else if (Key == JP2Left)		Joy.Bits[1][6] = true;
+		else if (Key == JP2Right)		Joy.Bits[1][7] = true;
+	} else if (Joy.type[1] == jpPaddle) {
+		if (Key == JP2A)				Joy.PaddleButtPressed = true;
+		else if (Key == JP2Left)		Joy.PaddlePosition -= (BYTE) 5;
+		else if (Key == JP2Right)		Joy.PaddlePosition += (BYTE) 5;
+		if (Joy.PaddlePosition < 98) Joy.PaddlePosition = 98;
+		if (Joy.PaddlePosition > 242) Joy.PaddlePosition = 242;
+	}
+}
+void __fastcall TStartFrm::KeyUpEv(TObject *Sender, WORD &Key, TShiftState Shift)
+{
+	if (Key == CoinIns)				Joy.CoinInsert = false;
+	if (Joy.type[0] == jpJoypad)
+	{
+		if (Key == JP1A)				Joy.Bits[0][0] = false;
+		else if (Key == JP1B)			Joy.Bits[0][1] = false;
+		else if (Key == JP1Select)		Joy.Bits[0][2] = false;
+		else if (Key == JP1Start)		Joy.Bits[0][3] = false;
+		else if (Key == JP1Up)			Joy.Bits[0][4] = false;
+		else if (Key == JP1Down)		Joy.Bits[0][5] = false;
+		else if (Key == JP1Left)		Joy.Bits[0][6] = false;
+		else if (Key == JP1Right)		Joy.Bits[0][7] = false;
+	}
+	if (Joy.type[1] == jpJoypad)
+	{
+		if (Key == JP2A)				Joy.Bits[1][0] = false;
+		else if (Key == JP2B)			Joy.Bits[1][1] = false;
+		else if (Key == JP2Select)		Joy.Bits[1][2] = false;
+		else if (Key == JP2Start)		Joy.Bits[1][3] = false;
+		else if (Key == JP2Up)			Joy.Bits[1][4] = false;
+		else if (Key == JP2Down)		Joy.Bits[1][5] = false;
+		else if (Key == JP2Left)		Joy.Bits[1][6] = false;
+		else if (Key == JP2Right)		Joy.Bits[1][7] = false;
+	} else if (Joy.type[1] == jpPaddle) {
+		if (Key == JP2A)				Joy.PaddleButtPressed = false;
+	}
+}
+
+void __fastcall TStartFrm::MouseDn(TObject *Sender, TMouseButton Button, TShiftState Shift, int X, int Y)
+{ if (Joy.type[1] == jpZapper) Joy.ZapperButtPressed = true; }
+void __fastcall TStartFrm::MouseMv(TObject *Sender, TShiftState Shift, int X, int Y)
+{
+	if (Joy.type[1] == jpZapper)
+	{
+		Joy.ZapperX = (BYTE) X; Joy.ZapperY = (BYTE) Y;
+	}
+}
+void __fastcall TStartFrm::MouseBtUp(TObject *Sender, TMouseButton Button, TShiftState Shift, int X, int Y)
+{ if (Joy.type[1] == jpZapper) Joy.ZapperButtPressed = false; }
+//---------------------------------------------------------------------------
+void __fastcall TStartFrm::Screen1Click(TObject *Sender)
+{ Screen1->Checked = true; GraphicsEngine = 0; }
+void __fastcall TStartFrm::Tile1Click(TObject *Sender)
+{ Tile1->Checked = true; GraphicsEngine = 1; }
+void __fastcall TStartFrm::Scanline1Click(TObject *Sender)
+{ Scanline1->Checked = true; GraphicsEngine = 2; }
+//---------------------------------------------------------------------------
+//Debugging Functions
+//---------------------------------------------------------------------------
+void __fastcall UpdateUI()
+{
+	if (!DebuggingRegs) return;
+	
+	if (Clockticks % 100 < 3)
+		Application->ProcessMessages();
+
+	StartFrm->PCInfo->Caption = IntToHex(PC, 4);
+	StartFrm->ClockticksInfo->Caption = (int) Clockticks;
+
+	StartFrm->AccumulatorInfo->Caption = IntToHex(A, 2);
+	StartFrm->XRegisterInfo->Caption = IntToHex(X, 2);
+	StartFrm->YRegisterInfo->Caption = IntToHex(Y, 2);
+	StartFrm->StackPointerInfo->Caption = IntToHex(SP, 2);
+
+#ifdef NewP
+	StartFrm->CarryCheck->Checked = P & C_Flag;
+	StartFrm->ZeroCheck->Checked = P & Z_Flag;
+	StartFrm->InterruptCheck->Checked = P & I_Flag;
+	StartFrm->DecimalCheck->Checked = P & D_Flag;
+	StartFrm->BreakCheck->Checked = P & B_Flag;
+	StartFrm->OverflowCheck->Checked = P & V_Flag;
+	StartFrm->NegativeCheck->Checked = P & N_Flag;
+#else
+	StartFrm->CarryCheck->Checked = CCR.C;
+	StartFrm->ZeroCheck->Checked = CCR.Z;
+	StartFrm->InterruptCheck->Checked = CCR.I;
+	StartFrm->DecimalCheck->Checked = CCR.D;
+	StartFrm->BreakCheck->Checked = CCR.B;
+	StartFrm->OverflowCheck->Checked = CCR.V;
+	StartFrm->NegativeCheck->Checked = CCR.N;
+#endif
+
+	StartFrm->OInfo->Caption = AnsiString((BGVis) ? "B1" : "B0") + AnsiString((SprVis) ? "S1" : "S0");
+	StartFrm->BGScrollXInfo->Caption = IntToHex(Mem.BgScrollX,2);
+	StartFrm->BGScrollYInfo->Caption = IntToHex(Mem.BgScrollY,2);
+
+	StartFrm->VRAMAddressInfo->Caption = IntToHex(Mem.VRAMAddress,4);
+	StartFrm->ScanlineInfo->Caption = ScanLine;
+
+	StartFrm->SPRAddressInfo->Caption = IntToHex(Mem.SPRAddress,2);
+	StartFrm->NameTableInfo->Caption = (NTabAdr - 0x2000) >> 10;
+	StartFrm->SoundLengthLeftInfo->Caption = AnsiString(PulseChan[0].LengthLeft) + AnsiString("   ") + AnsiString(PulseChan[1].LengthLeft);
+}
+
+void __fastcall TStartFrm::EmulationStepClick(TObject *Sender)
+{
+	ResumeAudio();
+	CPURunning = true;
+//	exec6502();
+		register BYTE opcode;
+		opcode = *Mem.Main[PC];
+		Addrmode((BYTE) addressmode[opcode]);
+		PC += bytes[opcode];
+		ExecOp((BYTE) instruc[opcode]);
+		Clockticks += ticks[opcode];
+		if (Clockticks >= LineTickCountInt) HBlank();
+	UpdateUI();
+	CPURunning = false;
+	PauseAudio();
+}
+
+void __fastcall TStartFrm::DisplayTrace1Click(TObject *Sender)
+{ DebuggingTrace ^= true; StartFrm->DisplayTrace1->Checked = DebuggingTrace; }
+void __fastcall TStartFrm::DebugRegisters1Click(TObject *Sender)
+{ DebuggingRegs ^= true; StartFrm->DebugRegisters1->Checked = DebuggingRegs; }
+void __fastcall TStartFrm::HaltonBadOpcode1Click(TObject *Sender)
+{ HaltOnBadOp ^= true; HaltonBadOpcode1->Checked = HaltOnBadOp; }
+void __fastcall TStartFrm::HaltonNMI1Click(TObject *Sender)
+{ HaltOnNMI ^= true; HaltonNMI1->Checked = HaltOnNMI; }
+void __fastcall TStartFrm::ClearTrapWindow1Click(TObject *Sender)
+{ StatusInfo->Clear(); }
+void __fastcall TStartFrm::DebugClearDebugWindowClick(TObject *Sender)
+{ TracerInfo->Clear(); }
+void __fastcall TStartFrm::ForceNMI1Click(TObject *Sender)
+{ nmi6502(); }
+void __fastcall TStartFrm::N6Click(TObject *Sender)
+{
+	bool tmpsp = SprVis, tmpbk = BGVis;
+	unsigned char tmpfs = curframe;
+	curframe = (unsigned char) frameskip;
+	SprVis = true;
+	BGVis = true;
+	DrawScreen();
+    SprVis = tmpsp;
+	BGVis = tmpbk;
+	curframe = tmpfs;
+}
+
+void __fastcall TStartFrm::DebugViewPatternTablesClick(TObject *Sender)
+{
+	clscreenbig();
+
+	for (LBYTE i=0;i<0x100;i++)
+	{
+		int xo = ((i % 16) << 3) + 7;
+    	int yo = (i-(i % 16)) >> 1;
+		int addro = (LBYTE) (i << 4);
+		unsigned char col;
+
+		for(unsigned char i=0;i<8;i++)
+			for (unsigned char h=0;h<8;h++)
+			{
+				col = (BYTE) ((bool) (Mem.PatternTable[0][addro+i] & (1 << h)) + ((bool) (Mem.PatternTable[0][addro+i+8] & (1 << h)) << 1));
+				psetbig(xo-h,yo+i,(BYTE) (0x40 | col));
+			}
+
+        xo += 128;
+
+		for(unsigned char i=0;i<8;i++)
+			for (unsigned char h=0;h<8;h++)
+			{
+				col = (BYTE) ((bool) (Mem.PatternTable[1][addro+i] & (1 << h)) + ((bool) (Mem.PatternTable[1][addro+i+8] & (1 << h)) << 1));
+				psetbig(xo-h,yo+i,(BYTE) (0x40 | col));
+			}
+	}
+
+	for (unsigned char x=0;x<16;x++)
+	{
+		for (unsigned char xx=0;xx<16;xx++)
+		{
+			for (unsigned char yy=0;yy<16;yy++)
+			{
+				psetbig((x << 4) + xx, 128 + yy, Mem.ImagePalette[x]);
+				psetbig((x << 4) + xx, 144 + yy, Mem.SpritePalette[x]);
+			}
+		}
+	}
+
+	renderbig();
+}
+
+void __fastcall TStartFrm::ViewNameTables1Click(TObject *Sender)
+{
+	DebugForm->Show();
+
+	BYTE ColBk, col, coltmp;
+	LBYTE xtmp, ytmp, addrtmp;
+
+	if (coldepth == 3)
+	{
+		unsigned char BV = GetBValue(Palette[Mem.ImagePalette[0]]), GV = GetGValue(Palette[Mem.ImagePalette[0]]), RV = GetRValue(Palette[Mem.ImagePalette[0]]);
+		for (int i=0;i<(240 << 10)*3;i+=3)
+		{
+			BMParray[i] = BV;
+			BMParray[i+1] = GV;
+			BMParray[i+2] = RV;
+		}
+	} else if (coldepth == 2) {
+		unsigned char V1 = (BYTE) (((BYTE) (GetBValue(Palette[Mem.ImagePalette[0]])/8))+(((BYTE) (GetGValue(Palette[Mem.ImagePalette[0]])/4)) << 5));
+		unsigned char V2 = (BYTE) ((((BYTE) (GetGValue(Palette[Mem.ImagePalette[0]])/4))>>3)+(((BYTE) (GetRValue(Palette[Mem.ImagePalette[0]])/8))<<3));
+		for (int i=0;i<(240 << 11);i+=2)
+		{
+			BMParray[i] = V1;
+			BMParray[i+1] = V2;
+		}
+	} else if (coldepth == 1) {
+		setmem(&BMParray[0],(240 << 10),NearestPalEntry[Mem.ImagePalette[0]]);
+	}
+
+	for (short int x=0;x<8;x++)
+	{
+		for (short int y=0;y<8;y++)
+		{
+			for (BYTE xx=0;xx<4;xx++)
+			{
+				for (BYTE yy=0;yy<4;yy++)
+				{
+					for (unsigned char x2=0;x2<2;x2++)
+						for (unsigned char y2=0;y2<2;y2++)
+						{
+							ColBk = *Mem.PPU[0x23C0 + (0x400 * x2) + (0x800 * y2) + (y << 3) + x];
+							xtmp = (LBYTE) ((x2 << 8) + (x << 5) + (xx << 3) + 7);
+							ytmp = (LBYTE) ((y2 * YMax) + (y << 5) + (yy << 3) - 8);
+							coltmp = (BYTE) (((ColBk >> ((bit1(xx) + (yy & 2)) << 1)) & 3) << 2);
+							addrtmp = (LBYTE) (*Mem.PPU[NTabAdr + (x2 << 10) + (y2 << 11) + ((y << 7) + (yy << 5)) + ((x << 2) + xx)] << 4);
+
+							if ((y < 7) || (yy < 2)) {
+							for(unsigned char i=0;i<8;i++) {
+								for (unsigned char h=0;h<8;h++) {
+									col = (BYTE) (bit(Mem.PatternTable[BkPTA][addrtmp+i], h) + (bit(Mem.PatternTable[BkPTA][addrtmp+i+8], h) << 1));
+//									if (col) psetbig2(xtmp-h,ytmp+i,48+coltmp + col);
+									if (col) psetbig2(xtmp-h,ytmp+i,*Mem.PPU[0x3F00 | (coltmp + col)]);
+							}	} }
+
+						}
+				}
+			}
+		}
+	}
+
+	renderbig2();
+}
+void __fastcall TStartFrm::DumpMainMemory1Click(TObject *Sender)
+{ FILE *out; out=fopen("memory.log","w+b"); for (int i=0;i<0x10000;i++) fwrite(Mem.Main[i],1,1,out); fclose(out); }
+void __fastcall TStartFrm::DumpVRAMClick(TObject *Sender)
+{ FILE *out; out=fopen("vram.log","w+b"); for (int i=0;i<0x4000;i++) fwrite(Mem.PPU[i],1,1,out); fclose(out); }
+void __fastcall TStartFrm::DumpSpriteMemoryClick(TObject *Sender)
+{ FILE *out; out=fopen("sprmem.log","w+b"); fwrite(&Mem.Sprite[0],1,0x100,out); fclose(out); }
+//void __fastcall DumpMainMem()
+//{ FILE *out; out=fopen("memory.log","w+b"); for (int i=0;i<0x10000;i++) fwrite(Mem.Main[i],1,1,out); fclose(out); }
+//void __fastcall DumpVRAM()
+//{ FILE *out; out=fopen("vram.log","w+b"); for (int i=0;i<0x4000;i++) fwrite(Mem.PPU[i],1,1,out); fclose(out); }
+//void __fastcall DumpSpriteMem()
+//{ FILE *out; out=fopen("sprmem.log","w+b"); fwrite(&Mem.Sprite[0],1,0x100,out); fclose(out); }
+//---------------------------------------------------------------------------
+void __fastcall TStartFrm::TakeScreenshot1Click(TObject *Sender)
+{ TakeSnap = true; }
+//---------------------------------------------------------------------------
+void __fastcall TStartFrm::ForceVblank1Click(TObject *Sender)
+{
+	ScanLine = VBScanLine;
+	if (NMIonVBlank) nmi6502();
+	VBlanking = true;
+	Spr0Occ = false;
+	VBlankOcc = true;
+}
+//---------------------------------------------------------------------------
+void __fastcall TStartFrm::PoweroffColdBoot1Click(TObject *Sender)
+{
+	HardBoot();	
+}
+//---------------------------------------------------------------------------
+void __fastcall TStartFrm::ToggleDebugger1Click(TObject *Sender)
+{
+	Debugger ^= true;
+	if (Debugger)
+	{
+		StartFrm->Width = 722;
+		StartFrm->Height = 456;
+		TimingForm->Show();
+	} else {
+		StartFrm->ClientWidth = 256;
+		StartFrm->ClientHeight = 240;
+		TimingForm->Hide();
+	}
+}
+//---------------------------------------------------------------------------

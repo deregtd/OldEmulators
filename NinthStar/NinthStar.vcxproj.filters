@@ -1,0 +1,265 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{258a9006-ca62-41b9-a0e4-9558a2bc8e62}</UniqueIdentifier>
+      <Extensions>ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe</Extensions>
+    </Filter>
+    <Filter Include="Resource Files\Extern Dependencies">
+      <UniqueIdentifier>{65aa19fe-dde3-4317-9bcf-d48cb4e6564e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="NES">
+      <UniqueIdentifier>{ad931c60-f568-41e2-8bd0-e15f7b10c569}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Atari 2600">
+      <UniqueIdentifier>{950a5814-4495-4fe2-bd00-eb0c4fa0da65}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Genesis">
+      <UniqueIdentifier>{ac199c7e-50a7-453a-94a0-56828d38bbd7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Coleco">
+      <UniqueIdentifier>{48274690-a0f2-4ed7-98b6-c67e1f65af7f}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="NinthStar.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="small.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="resource.h">
+      <Filter>Resource Files</Filter>
+    </ClInclude>
+    <ClInclude Include="StdAfx.h">
+      <Filter>Resource Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Program Files\Microsoft Visual Studio\VC98\Include\BASETSD.H">
+      <Filter>Resource Files\Extern Dependencies</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Program Files\Microsoft Visual Studio\VC98\Include\d3d8.h">
+      <Filter>Resource Files\Extern Dependencies</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Program Files\Microsoft Visual Studio\VC98\Include\d3d8caps.h">
+      <Filter>Resource Files\Extern Dependencies</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Program Files\Microsoft Visual Studio\VC98\Include\d3d8types.h">
+      <Filter>Resource Files\Extern Dependencies</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Program Files\Microsoft Visual Studio\VC98\Include\d3dx8.h">
+      <Filter>Resource Files\Extern Dependencies</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Program Files\Microsoft Visual Studio\VC98\Include\d3dx8core.h">
+      <Filter>Resource Files\Extern Dependencies</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Program Files\Microsoft Visual Studio\VC98\Include\d3dx8effect.h">
+      <Filter>Resource Files\Extern Dependencies</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Program Files\Microsoft Visual Studio\VC98\Include\d3dx8math.h">
+      <Filter>Resource Files\Extern Dependencies</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Program Files\Microsoft Visual Studio\VC98\Include\d3dx8mesh.h">
+      <Filter>Resource Files\Extern Dependencies</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Program Files\Microsoft Visual Studio\VC98\Include\d3dx8shape.h">
+      <Filter>Resource Files\Extern Dependencies</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Program Files\Microsoft Visual Studio\VC98\Include\d3dx8tex.h">
+      <Filter>Resource Files\Extern Dependencies</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Program Files\Microsoft Visual Studio\VC98\Include\dxfile.h">
+      <Filter>Resource Files\Extern Dependencies</Filter>
+    </ClInclude>
+    <ClInclude Include="NES\2A03.h">
+      <Filter>NES</Filter>
+    </ClInclude>
+    <ClInclude Include="NES.h">
+      <Filter>NES</Filter>
+    </ClInclude>
+    <ClInclude Include="NES\NES_APU.h">
+      <Filter>NES</Filter>
+    </ClInclude>
+    <ClInclude Include="NES\NES_Controllers.h">
+      <Filter>NES</Filter>
+    </ClInclude>
+    <ClInclude Include="NES\NES_Debugger.h">
+      <Filter>NES</Filter>
+    </ClInclude>
+    <ClInclude Include="NES\NES_GFX.h">
+      <Filter>NES</Filter>
+    </ClInclude>
+    <ClInclude Include="NES\NES_Handlers.h">
+      <Filter>NES</Filter>
+    </ClInclude>
+    <ClInclude Include="NES\NES_MapperInterface.h">
+      <Filter>NES</Filter>
+    </ClInclude>
+    <ClInclude Include="NES\NES_PPU.h">
+      <Filter>NES</Filter>
+    </ClInclude>
+    <ClInclude Include="NES\NES_PPU_Pixel.h">
+      <Filter>NES</Filter>
+    </ClInclude>
+    <ClInclude Include="NES\NES_PPU_Scanline.h">
+      <Filter>NES</Filter>
+    </ClInclude>
+    <ClInclude Include="Nes\NES_PPU_Tile.h">
+      <Filter>NES</Filter>
+    </ClInclude>
+    <ClInclude Include="NES\NES_States.h">
+      <Filter>NES</Filter>
+    </ClInclude>
+    <ClInclude Include="Atari2600\6507.h">
+      <Filter>Atari 2600</Filter>
+    </ClInclude>
+    <ClInclude Include="Atari2600\A26_Debugger.h">
+      <Filter>Atari 2600</Filter>
+    </ClInclude>
+    <ClInclude Include="Atari2600\A26_GFX.h">
+      <Filter>Atari 2600</Filter>
+    </ClInclude>
+    <ClInclude Include="Atari2600\A26_PIA.H">
+      <Filter>Atari 2600</Filter>
+    </ClInclude>
+    <ClInclude Include="Atari2600\A26_TIA.H">
+      <Filter>Atari 2600</Filter>
+    </ClInclude>
+    <ClInclude Include="Atari2600.h">
+      <Filter>Atari 2600</Filter>
+    </ClInclude>
+    <ClInclude Include="Genesis\68000.h">
+      <Filter>Genesis</Filter>
+    </ClInclude>
+    <ClInclude Include="Genesis\Gen_Debugger.h">
+      <Filter>Genesis</Filter>
+    </ClInclude>
+    <ClInclude Include="Genesis\Gen_GFX.h">
+      <Filter>Genesis</Filter>
+    </ClInclude>
+    <ClInclude Include="Genesis.h">
+      <Filter>Genesis</Filter>
+    </ClInclude>
+    <ClInclude Include="Coleco\Col_Controllers.h">
+      <Filter>Coleco</Filter>
+    </ClInclude>
+    <ClInclude Include="Coleco\Col_Debugger.h">
+      <Filter>Coleco</Filter>
+    </ClInclude>
+    <ClInclude Include="Coleco\Col_GFX.h">
+      <Filter>Coleco</Filter>
+    </ClInclude>
+    <ClInclude Include="Coleco\Col_PPU.h">
+      <Filter>Coleco</Filter>
+    </ClInclude>
+    <ClInclude Include="Coleco\Col_Z80.h">
+      <Filter>Coleco</Filter>
+    </ClInclude>
+    <ClInclude Include="Coleco.h">
+      <Filter>Coleco</Filter>
+    </ClInclude>
+    <ClInclude Include="EmuBase.h" />
+    <ClInclude Include="Global.h" />
+    <ClInclude Include="NinthStar.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="StdAfx.cpp">
+      <Filter>Resource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="NES\2A03.cpp">
+      <Filter>NES</Filter>
+    </ClCompile>
+    <ClCompile Include="NES.cpp">
+      <Filter>NES</Filter>
+    </ClCompile>
+    <ClCompile Include="NES\NES_APU.cpp">
+      <Filter>NES</Filter>
+    </ClCompile>
+    <ClCompile Include="NES\NES_Controllers.cpp">
+      <Filter>NES</Filter>
+    </ClCompile>
+    <ClCompile Include="NES\NES_Debugger.cpp">
+      <Filter>NES</Filter>
+    </ClCompile>
+    <ClCompile Include="NES\NES_GFX.cpp">
+      <Filter>NES</Filter>
+    </ClCompile>
+    <ClCompile Include="NES\NES_Handlers.cpp">
+      <Filter>NES</Filter>
+    </ClCompile>
+    <ClCompile Include="NES\NES_PPU.cpp">
+      <Filter>NES</Filter>
+    </ClCompile>
+    <ClCompile Include="NES\NES_PPU_Pixel.cpp">
+      <Filter>NES</Filter>
+    </ClCompile>
+    <ClCompile Include="NES\NES_PPU_Scanline.cpp">
+      <Filter>NES</Filter>
+    </ClCompile>
+    <ClCompile Include="Nes\NES_PPU_Tile.cpp">
+      <Filter>NES</Filter>
+    </ClCompile>
+    <ClCompile Include="NES\NES_States.cpp">
+      <Filter>NES</Filter>
+    </ClCompile>
+    <ClCompile Include="Atari2600\6507.cpp">
+      <Filter>Atari 2600</Filter>
+    </ClCompile>
+    <ClCompile Include="Atari2600\A26_Debugger.cpp">
+      <Filter>Atari 2600</Filter>
+    </ClCompile>
+    <ClCompile Include="Atari2600\A26_GFX.cpp">
+      <Filter>Atari 2600</Filter>
+    </ClCompile>
+    <ClCompile Include="Atari2600\A26_PIA.CPP">
+      <Filter>Atari 2600</Filter>
+    </ClCompile>
+    <ClCompile Include="Atari2600\A26_TIA.CPP">
+      <Filter>Atari 2600</Filter>
+    </ClCompile>
+    <ClCompile Include="Atari2600.cpp">
+      <Filter>Atari 2600</Filter>
+    </ClCompile>
+    <ClCompile Include="Genesis\68000.cpp">
+      <Filter>Genesis</Filter>
+    </ClCompile>
+    <ClCompile Include="Genesis\Gen_Debugger.cpp">
+      <Filter>Genesis</Filter>
+    </ClCompile>
+    <ClCompile Include="Genesis\Gen_GFX.cpp">
+      <Filter>Genesis</Filter>
+    </ClCompile>
+    <ClCompile Include="Genesis.cpp">
+      <Filter>Genesis</Filter>
+    </ClCompile>
+    <ClCompile Include="Coleco\Col_Controllers.cpp">
+      <Filter>Coleco</Filter>
+    </ClCompile>
+    <ClCompile Include="Coleco\Col_Debugger.cpp">
+      <Filter>Coleco</Filter>
+    </ClCompile>
+    <ClCompile Include="Coleco\Col_GFX.cpp">
+      <Filter>Coleco</Filter>
+    </ClCompile>
+    <ClCompile Include="Coleco\Col_PPU.cpp">
+      <Filter>Coleco</Filter>
+    </ClCompile>
+    <ClCompile Include="Coleco\Col_Z80.cpp">
+      <Filter>Coleco</Filter>
+    </ClCompile>
+    <ClCompile Include="Coleco.cpp">
+      <Filter>Coleco</Filter>
+    </ClCompile>
+    <ClCompile Include="Global.cpp" />
+    <ClCompile Include="NinthStar.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\Program Files\Microsoft Visual Studio\VC98\Include\d3dx8math.inl">
+      <Filter>Resource Files\Extern Dependencies</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="NinthStar.rc" />
+  </ItemGroup>
+</Project>

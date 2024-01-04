@@ -1,0 +1,113 @@
+<HTML>
+<BODY bgColor=black link=lightblue text=white>
+<A name=Progress><FONT color=red size=6>Progress/Code Structure:</FONT>
+<table border="1" width="100%" height="99">
+  <tr>
+    <td width="11%" rowspan="7" height="1"><font size="4" color="#FF0000"><b>cNES:</b></font>
+      <p><font size="4" color="#FF0000"><b>95%</b></font></p>
+    </td>
+    <td width="80%" height="25"><font size="3"><font color="#FF0000"><b>c2A03</b></font>, <font color="#00FFFF">2A03,
+      the CPU</font> - <font color="#00FF00"><i>100%</i></font></font></td>
+  </tr>
+  <tr>
+    <td width="80%" height="25"><font size="3"><b><font color="#FF0000">c<A name=Progress>NES_</a>PPU</font></b>,
+      <font color="#00FFFF">Picture Processing Unit</font> - <font color="#00FF00"><i>100%</i></font></font></td>
+  </tr>
+  <tr>
+    <td width="80%" height="25"><font size="3"><b><font color="#FF0000">c<A name=Progress>NES_</a>GFX</font></b>,
+      <font color="#00FFFF">Graphics</font> - <i><font color="#00FF00">100%</font></i></font></td>
+  </tr>
+  <tr>
+    <td width="80%" height="25"><font size="3"><b><font color="#FF0000">c<A name=Progress>NES_</a>Controllers</font></b>,
+      <font color="#00FFFF">Controllers</font> - <font color="#00FF00"><i>100%</i></font></font></td>
+  </tr>
+  <tr>
+    <td width="80%" height="25"><font size="3"><b><font color="#FF0000">c<A name=Progress>NES_</a>States</font></b>,
+      <font color="#00FFFF">Save States</font> - <font color="#00FF00"><i>99%</i></font></font></td>
+  </tr>
+  <tr>
+    <td width="80%" height="1"><font size="3"><font color="#FF0000"><b>cNES_Debugger</b></font>,
+      <font color="#00FFFF">The Debugger</font> - <font color="#00FF00"><i>95%</i></font></font></td>
+  </tr>
+  <tr>
+    <td width="80%" height="25"><font size="3"><font color="#FF0000"><b>cNES_APU</b></font>,
+      <font color="#00FFFF">Sound</font> - <font color="#FFFF00"><i>50%</i></font></font></td>
+  </tr>
+</table>
+<table border="1" width="100%" height="8">
+  <tr>
+    <td width="11%" rowspan="6" height="1"><b><font size="4" color="#00FF00">cAtari2600:</font></b>
+      <p><b><font size="4" color="#00FF00">&nbsp;80%</font></b></p>
+    </td>
+    <td width="80%" height="25"><font size="3"><b><font color="#00FF00">c6507</font></b>, <font color="#00FFFF">6507,
+      the CPU</font> - <i><font color="#00FF00">99%</font></i></font></td>
+  </tr>
+  <tr>
+    <td width="80%" height="25"><font size="3"><b><font color="#00FF00">cA26_GFX</font></b>,
+      <font color="#00FFFF">Graphics</font> - <font color="#00FF00"><i>99</i></font><i><font color="#00FF00">%</font></i></font></td>
+  </tr>
+  <tr>
+    <td width="80%" height="25"><font size="3"><b><font color="#00FF00">cA26_PIA</font></b>,
+      <font color="#00FFFF">Peripheral Interface Adapter (Stuff + Controllers)</font>
+      - <font color="#00FF00"><i>80%</i></font></font></td>
+  </tr>
+  <tr>
+    <td width="80%" height="25"><font size="3"><font color="#00FF00"><b>cA26_TIA</b></font>,
+      <font color="#00FFFF">Television Interface Adapter</font> - <font color="#00FF00"><i>99</i></font><i><font color="#00FF00">%</font></i></font></td>
+  </tr>
+  <tr>
+    <td width="80%" height="25"><font size="3"><font color="#00FF00"><b>cA26_Debugger</b></font>,
+      <font color="#00FFFF">The Debugger</font> - <font color="#00FF00"><i>80</i></font><i><font color="#00FF00">%</font></i></font></td>
+  </tr>
+  <tr>
+    <td width="80%" height="25"><font size="3" color="#00FF00"><b>Mappers
+      Supported: </b></font><font size="3" color="#00FFFF">2k Carts, 4k Carts,
+      8k F8 Type, 16k F6 Type</font></td>
+  </tr>
+</table>
+<table border="1" width="100%" height="1">
+  <tr>
+    <td width="11%" rowspan="3" height="1"><b><font size="4" color="#FFFF00">cGenesis:</font></b>
+      <p><b><font size="4" color="#FFFF00">2%</font></b></p>
+    </td>
+    <td width="80%" height="1"><font size="3"><b><font color="#FFFF00">c68000</font></b>,
+      <font color="#00FFFF">68k,
+      the CPU</font> - <font color="#FF0000"><i>5%</i></font></font></td>
+  </tr>
+  <tr>
+    <td width="80%" height="19"><font size="3"><b><font color="#FFFF00">cGen_GFX</font></b>,
+      <font color="#00FFFF">Graphics</font> - <i><font color="#FFFF00">60%</font></i></font></td>
+  </tr>
+  <tr>
+    <td width="80%" height="19"><font size="3"><b><font color="#FFFF00">cGen_Debugger</font></b>,
+      <font color="#00FFFF">The Debugger</font> - <i><font color="#FF0000">10%</font></i></font></td>
+  </tr>
+</table>
+<table border="1" width="100%" height="1">
+  <tr>
+    <td width="11%" rowspan="5" height="1"><b><font size="4" color="#FF00FF">cColeco:</font></b>
+      <p><b><font size="4" color="#FF00FF">2%</font></b></p>
+    </td>
+    <td width="80%" height="1"><font size="3"><b><font color="#FF00FF">cCol_Z80</font></b>,
+      <font color="#00FFFF">Z80,
+      the CPU</font> - <font color="#FF0000"><i>5%</i></font></font></td>
+  </tr>
+  <tr>
+    <td width="80%" height="19"><font size="3"><b><font color="#FF00FF">cCol_GFX</font></b>,
+      <font color="#00FFFF">Graphics</font> - <i><font color="#FFFF00">60%</font></i></font></td>
+  </tr>
+  <tr>
+    <td width="80%" height="7"><font size="3"><b><font color="#FF00FF">cCol_Debugger</font></b>,
+      <font color="#00FFFF">The Debugger</font> - <i><font color="#FF0000">10%</font></i></font></td>
+  </tr>
+  <tr>
+    <td width="80%" height="6"><font size="3"><b><font color="#FF00FF">cCol_PPU</font></b>,<font color="#00FFFF">
+      the PPU</font> - <font color="#FF0000"><i>5%</i></font></font></td>
+  </tr>
+  <tr>
+    <td width="80%" height="6"><font size="3"><b><font color="#FF00FF">cCol_Controllers</font></b>,
+      <font color="#00FFFF">Controllers</font> - <font color="#FF0000"><i>20%</i></font></font></td>
+  </tr>
+</table>
+</BODY>
+</HTML>

@@ -1,0 +1,157 @@
+<HTML>
+<BODY bgColor=black link=lightblue text=white>
+<CENTER>
+<HR WIDTH=20%>
+<FONT color=red size=8>NinthStar</FONT><BR>
+<FONT color=blue size=5>Beyond Reality...</FONT>
+<HR width="20%">
+<a href="http://member.bcentral.com/cgi-bin/fc/fastcounter-login?2248967" target="_top">
+<img border="0" src="http://fastcounter.bcentral.com/fastcounter?2248967+4497941"></a>
+<HR width="20%">
+</CENTER>
+
+<A name=News><FONT color=red size=6>News:</FONT><P>
+
+<FONT color=blue size=4>1/15/2001 (2:00pm)</FONT>
+<HR align=left color=blue width=130>
+<FONT color=red size=3>
+Okay.  Today's three college apps are done.  My only worry is that I didn't realize there
+was a signature page for Harvey Mudd, so I gotta do something about that REAL fast...<P>
+
+I've been working on the NES portion of ninthstar some, but I don't think it's anything
+release-worthy yet.<P>
+
+Well here's the plan.  Keeping Ninthstar as a multi-console emu's not working out so well.
+The swapping class system is hard to keep from having memory leaks, and getting everything
+to release itself properly is turnout out to be a nightmare.  So my plan is to split it up.
+The NES portion will shortly turn into a full NES IDE, something like MSVC but for the NES,
+with a full emulator in it. The atari/other emulators will be split into their own emulators.
+This should make the interface cleaner and make the system smaller and easier to change.<P>
+
+The NES IDE will be started shortly.  I'm going to try to add complete sound to NinthStar
+in its current form then begin the NES IDE.  Stay tuned for news...
+</FONT><P>
+
+<FONT color=blue size=4>1/3/2001 (10:30pm)</FONT>
+<HR align=left color=blue width=130>
+<FONT color=red size=3>
+Happy New Millenium rsmth...<P>
+
+NES: Buncha stuff.  Added support for UNIF.  Rewrote much of the coding system.  Added support
+for Quietust's Mappers.dll file so now I support a boatload of mappers.  (Same mappers as NESten)
+I don't even know the list, I just know there's a lot of them.  Fixed a buncha stuff.  Save States
+are mildly buggy now due to the limitations of the SNSS format.  A couple of us are going to try
+to get the format updated because it's so badly out of date with current NES knowledge.  Everything
+SHOULD be in working order, but i guarantee there's a problem SOMEWHERE... :P<P>
+
+Coleco: Added Coleco base.  I'm gonna write a Z80 core and get that perfect before moving onto
+Genesis, because genesis is both a 68k core AND a Z80 core, and I want to have at least one working
+near-perfectly before I jump on in. =)  I've had a bunch of requests for Coleco too.  So I'll be
+working on that in the near future.<P>
+
+NES_Mappers.dll is in the Build .zip file.  You'll need it to run the emulator, so if you want to
+do some dev, put copies of it in both release\ and debug\ of the base ninthstar directory or else
+it will proceed to blow up.<P>
+
+Progress page has been updated to reflect the current class structure, and the drastic simplification
+of classes that I did since last update.  Progress counts have been updated too, including a general
+percentage done of the whole system.<P>
+
+At some point I'll update Screenshots...<P>
+
+Latest Source/Build is up!
+</FONT><P>
+
+<FONT color=blue size=4>12/31/2000 (2:00am)</FONT>
+<HR align=left color=blue width=130>
+<FONT color=red size=3>
+Woot, Brown app is sent.  Boy does that feel better... =)<P>
+
+NES: Fixed Save States.  Fixed some bugs in the controllers.<P>
+
+Atari 2600: Added a bunch more registers.  Full collisions are in, and the horizontal movement
+registers are all fixed, and it's working very nicely.  All that's left are controllers.  Home
+and PageUp are hardcoded to Reset/Game Select right now if u wanna try to use it.  I'll do
+controllers then work on converting the scanline-engine to a pixel-based engine.<P>
+
+Genesis: I'm reading up on how to do DynaRecomp from www.dynarec.com.  I think it should be
+very do-able for the 68k core.<P>
+
+Interface: Made it far more modular.  Slimmed down the cEmuBase class to a few basic functions
+and then a EmuMsg function that takes all the WM_COMMAND messages from the interface and lets
+the individual emulator deal with it instead of having a massive handler switch like i had
+before.  Doing this allowed me to remove a great number of function hacks to get the interface
+talking with the emulators, so everything's much neater now.<P>
+
+Webpage: One of these days I'll make some new screenshots...<P>
+
+Working on now: NES Scanline-Based PPU, NES Sound, Atari Controllers, Atari Pixel-Based PPU,
+Genesis 68k DynaRec Core, Genesis 68k Interpretive Core, Screenshots for the webpage.<P>
+
+Latest Source/Build is up!
+</FONT><P>
+
+<FONT color=blue size=4>12/28/2000 (2:00am)</FONT>
+<HR align=left color=blue width=130>
+<FONT color=red size=3>
+Well, today's project was a bit different.  I got bored, so I made mIRCNES.  It's basically
+the NES portion of NinthStar, stripped way down, and thrown into a mIRC window!  It's 
+really cool. :)  Get it off the Downloads page.  Instructions for installation are
+included in the .zip file.  Mail me with any problems you have or any comments/questions.
+</FONT><P>
+
+<FONT color=blue size=4>12/27/2000 (1:00pm)</FONT>
+<HR align=left color=blue width=130>
+<FONT color=red size=3>
+NES: Well I worked a bunch on the emulator over the last few days.  The CPU's been optimized
+a bunch.  The ratio is now 70% of cpu time is spent on the PPU and 25% is on the
+2A03, so I can concentrate optimization efforts on the PPU now.<P>
+
+NES: I added a fatty-ass controllers window that will support all of your directinput needs.
+All joysticks supported by directinput are supported.  Send me your joystick names and
+button combinations that you think are best so that I can add them to the autoconfigure.
+Keyboard is also supported, as usual. :)  In fact, keyboard can be used in conjunction with
+joysticks if your joystick doesn't have enough buttons!  I've only been able to test
+the controllers with my setup, so if it doesn't work PLEASE email me with your observations!
+Thanks!<P>
+
+All systems: Settings are now stored in the registry, so your controller settings WILL
+BE SAVED when you customize them!<P>
+
+Genesis: I added a shell for the Sega Genesis.  I'll start working on the 68k after the
+new year.  Cuz now I have 4 days to write college essays and i still have a few left to
+do. :)  Merry Belated XMas, all!<P>
+
+Latest Build/Source is up!
+</FONT><P>
+
+<FONT color=blue size=4>12/25/2000 (1:00pm)</FONT>
+<HR align=left color=blue width=130>
+<FONT color=red size=3>
+Well, Happy Holidays everyone!  I've been screwing around with my cousins for the past
+few days.  Nothing new on NinthStar except the site change.<P>
+
+No banners, CGI, lotsa stuff.  Wewt.<P>
+
+I also removed all older news items except the landmarks.  The news file was passing 25k.
+</FONT><P>
+
+<FONT color=blue size=4>12/18/2000</FONT>
+<HR align=left color=blue width=130>
+<FONT color=green size=3>
+Landmark: Atari 2600 Added.
+</FONT><P>
+
+<FONT color=blue size=4>12/18/2000</FONT>
+<HR align=left color=blue width=130>
+<FONT color=green size=3>
+Landmark: Name Changed to NinthStar.
+</FONT><P>
+
+<P><FONT color=blue size=4>11/26/2000</FONT>
+<HR align=left color=blue width=80><FONT color=green size=3>
+Landmark: Birth of nes#emu.
+</FONT><P>
+
+</BODY>
+</HTML>

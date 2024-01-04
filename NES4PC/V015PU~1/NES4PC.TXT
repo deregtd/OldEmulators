@@ -1,0 +1,244 @@
+                        ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+                             NES4PC
+                       v.15 Public Beta 1
+                        ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+
+        ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+        ³ NES4PC General Info ³
+        ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+
+  NES4PC is a Nintendo Entertainment System emulator for Windows 95/98/NT.
+It is programmed in Borland C++ Builder, and is entirely in C++, although I
+am working on a QBasic port out of curiosity, and in hopes that I'll find a
+bug in the windows CPU core by not making the same bug in the QBasic version
+and then comparing cores. =)  Too bad I'm making more bugs in the QBasic core
+than in the C++ core, but anyhoo... =P
+  NES4PC is written by David de Regt, who goes by the nickname of AkIlLa^ in
+most internet places.  Yes, for those of you who recognize the nickname, I
+*AM* the one who did the FF3e translation that was furthest until AWJ/Som2
+did theirs.  But anyway, on to the juicy tidbits of info that you actually
+wanna read!
+
+        ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+        ³ New in this version ³
+        ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+
+* Graphics: 8-Bit GRAPHICS MODE PERFECTED!  Speedy as hell!  Much faster than
+            16-bit and 24-bit modes!
+* CPU: Removed the 3 undocumented instructions since I don't think they belong
+       implemented and all you get is a few more invalid opcode messages but
+       the games still run fine since the emulator isn't set to stop on bad
+       opcodes.
+* Memory: Memory management largely redone.  Bank switching code erased and
+          rewrote from scratch (ooh that was fun...)  Now it's much more
+          accurate, however, and mappers should work much better as well as
+          that the emulator should GPF a lot less!
+* PPU: Fixed large background scroll bug that made it scroll 240 rows of the
+       name tables on the y axis instead of the NTSC 224.
+* PPU: Fixed huge background scroll bug where it wasn't overflowing and
+       starting over again at the first name table in the scroll.
+* PPU: Made Background scroll Y value set to 0 if it's more than 239.  It's
+       not correct, but it's a temporary solution until I make the PPU code
+       wrappable for those purposes.
+* PPU: Made background color go for whole name table array instead of just
+       the first one.
+* PPU: Large bug fixed in rendering code - Not all 224 rows were being drawn
+       which was cutting off the lower 8 rows of some games, and specifically,
+       the Zelda title screen demo.  That now displays perfectly.
+* PPU: HUGE BUG FIXED in scrolling since name tables weren't being drawn
+       fully so that's what was causing those blank lines in games like
+       Thexder!
+* VRAM: A few read/write bugs fixed
+* Game Genie: Fully Implemented!  6-Letter and 8-Letter Codes!
+* Interface: Because of the new bank switching engine, the PRG/CHR debug
+             captions are now rendered useless since it would be too long to
+             fit on the lines provided and would be unusable for most purposes
+             since it's so different from the actual page #s which use unique
+             bank sizes for each mapper.
+* Interface: Added automatic frameskipping
+* Interface: HUGE BUG FIXED in name table viewer
+* Interface: Made it set up everything as soon as the emulator is run instead
+             of when you load a game.  This should make it so that it doesn't
+             always GPF if you do anything before loading a game. =)
+* Interface: Changed controller config window to the general options window
+             and put all configuration options in there like Game Genie codes,
+             frameskipping options, etc...
+* Interface: GPFs a **LOT** less!
+* Mappers: Fixed a large bug in Mapper #1 (MMC1) where it wasn't resetting
+           the MMC1 registers right.
+* Mappers: A few bugs fixed in Mapper #4 (MMC3).
+* Mappers: Mapper #15 Partially Implemented, but I need much more info on it!
+           The info I have is VERY vague (firebug's doc)!  It's disabled here
+           because it hasn't been rewritten for the new bank switching engine
+           yet.
+* Mappers: Removed support all mappers above #7 (Except #15) because I haven't
+           found any ROMs to test on them yet and I didn't want to reimplement
+           them in my new bank switching format if there was no point to it.
+
+        ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+        ³ Expect in v.15 final ³
+        ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+
+* Quad Controllers
+* SRAM Loading/Saving
+* Saving of settings into the system registry
+* Mapper #15 working somewhat
+* Mapper #1, #4 fixed and probably basically finalized
+* Accurate CPU/PPU timing as opposed to the crap I have right now
+* DirectSound support for at least Pulse 1/2 and probably tri/noise as well
+
+        ÚÄÄÄÄÄÄÄÄÄÄ¿
+        ³ Requests ³
+        ÀÄÄÄÄÄÄÄÄÄÄÙ
+
+1. HELP WITH THE MAPPERS!  I NEED MAJOR HELP WITH THESE!  MORE INFO IS GREATLY
+   NEEDED!
+2. If you know of any ROMs that are other than #0, #1, #2, #3, or #4, please
+   tell me where they are!  I need to be able to test these mappers and I
+   have 1 game each for mapper #7 and #15...
+3. Information on the zapper
+
+        ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+        ³ Beta Testers ³
+        ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+
+  If you do not know who Y0SHi is, please continue to the next section.
+  If you do not know who Marat is, please place a large garbage bag with one
+of those drawstrings over your head, tighten the drawstring, tie it tightly,
+and sit down.  Don't worry, you'll meet all your ancestors soon.
+
+  OK, unless you're cheating or you just like skipping the first paragraph
+of a section, you know something about emulation.  I am looking for beta
+testers that preferably know something about the 6502, and wouldn't be
+clueless about using all the functions of my emulator.  If you think you
+are ready to commit at least a good few hours prior to each release version,
+then you might be the person for the job.  Look in the contacting the author
+section for my email address.  And if you think you're gonna be 31337 and
+get into my beta testing crew to release 31337 beta copies of my emulator,
+you are gonna have a surprise when I match the signature of the file to the
+copy I gave you (I will give each beta copy a unique signature in the file
+that you won't be able to find or for that matter, change).  You will then
+be prosecuted for breach of a confidentiality agreement.  No, I am not spiting
+bullshit here.  I can, and will, do the above stated if such a thing occurs.
+I don't want to, I'm just saying that I *CAN*.
+
+        ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+        ³ Contacting the Author ³
+        ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+
+Name:           David de Regt
+Location:       Bellevue, WA, USofA
+IRC:
+        UnderNet:       #gbinfow/#emu
+        EfNet:          #emu/#romhack/#zopharsdomain
+Email:
+        For the next few weeks:         akilla@dycom.net
+        After the next few weeks:       akilla@earthlink.net
+
+        ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+        ³ Version History ³
+        ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+
+v0.12 Beta (11/9/98):
+* CPU: Added two undocumented instructions
+* CPU: Fixed an addressing mode bug
+* CPU: Tweaked a few instructions
+* PPU: Fixed huge bug in vertical scrolling.  The game genie demo should be
+       perfect now.
+* PPU: Fixed 8x16 sprite display bug
+* PPU: Fixed NTSC/PAL display centering bug
+* PPU: Fixed background scrolling bug
+* PPU: Fixed large background color bug
+* Controllers: Paddle support added
+* Controllers: Initial Zapper support added
+* Mappers: Fixed a few MMC1 Bugs
+* Mappers: Finished initial MMC3 Implementation, although I don't know how
+           the IRQs are supposed to work...  NE1 wanna help me out with this?
+* General: A few minor speedups
+
+v0.1 Beta (11/5/98):
+* First Version   
+
+        ÚÄÄÄÄÄÄÄÄÄÄ¿
+        ³ Features ³
+        ÀÄÄÄÄÄÄÄÄÄÄÙ
+
+ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÂÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÂÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+³ Part in question ³ Supported            ³ To Do                     ³
+ÆÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍØÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍØÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍµ
+³ 6502 CPU         ³ All documented op-   ³ Accurate timing           ³
+³                  ³ codes and addressing ³                           ³
+³                  ³ modes                ³ Easy switch between NTSC  ³
+³                  ³                      ³ and PAL                   ³
+³                  ³ Three undocumented   ³                           ³
+³                  ³ instructions         ³                           ³
+ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+³ PPU              ³ All mirroring, pal-  ³ Accurate timing           ³
+³                  ³ ettes, scrolling,    ³                           ³
+³                  ³ sprites (8x8 & 8x16),³                           ³
+³                  ³ sprite flipping,     ³                           ³
+³                  ³ sprite priority      ³                           ³
+³                  ³                      ³                           ³
+³                  ³ Variable frameskip & ³                           ³
+³                  ³ FPS meter.           ³                           ³
+³                  ³                      ³                           ³
+³                  ³ Autoframeskipping    ³                           ³
+ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+³ SRAM             ³ It's emulated in code³ Saving of SRAM to file,   ³
+³                  ³ but nothing is saved ³ loading of saved SRAM     ³
+³                  ³ to files yet.        ³                           ³
+ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+³ pAPU             ³ All channels partly  ³
+³                  ³ emulated in code.    ³
+³                  ³                      ³
+ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+³ Mappers          ³ Fully Supported and  ³ Fix #1, #4, and #15       ³
+³                  ³ Tested:              ³                           ³
+³                  ³ 0, 1, 2, 3, 4, 7     ³ Add more mappers          ³
+³                  ³                      ³                           ³
+³                  ³ Temporaraly Disabled:³                           ³
+³                  ³ 15                   ³                           ³
+ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+³ Controllers      ³ 2 Joypads using the  ³ 4 Controllers             ³
+³                  ³ keyboard             ³                           ³
+³                  ³                      ³ Full Zapper               ³
+³                  ³ Paddle               ³                           ³
+³                  ³                      ³ DirectInput               ³
+³                  ³ Preliminary Zapper   ³                           ³
+ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+³ Graphics Modes   ³ 24-bit, 16-bit,      ³ DirectDraw                ³
+³                  ³ 8-bit                ³                           ³
+ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+³ Sound            ³ Disabled Pulse 1/2   ³ Fixed Pulse 1/2 output,   ³
+³                  ³ sound output         ³ Triangle, Noise, and DMC  ³
+³                  ³                      ³ output.                   ³
+³                  ³                      ³                           ³
+³                  ³                      ³ DirectSound               ³
+ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+³ Game Genie       ³ Full Support for 6   ³
+³                  ³ and 8 letter codes!  ³
+ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+³ Debugger         ³ Hugely extensive     ³
+³                  ³ debugger, has every- ³
+³                  ³ thing you'd need to  ³
+³                  ³ test and debug a     ³
+³                  ³ game you wrote or    ³
+³                  ³ to simply find out   ³
+³                  ³ where the lives var- ³
+³                  ³ iable is stored. =)  ³
+ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÁÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+
+        ÚÄÄÄÄÄÄÄÄ¿
+        ³ Thanks ³
+        ÀÄÄÄÄÄÄÄÄÙ
+
+Johannes Holmberg, programmer of unNESsential, for having made the
+  same 6502 CPU bugs as me while programming it, and telling
+  me how to fix them, as well as providing tips for various
+  other aspects of emulating the NES, and lastly for beta-
+  testing the emulator!
+
+Y0SHi, for his personal answers to my nagging questions and for
+  giving me confidential material of his which I won't mention
+  but he knows what I'm talking about.  Let's just say it
+  really REALLY helped!

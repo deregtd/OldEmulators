@@ -1,0 +1,216 @@
+                        ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+                             NES4PC
+                           v0.12 Beta
+                        ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+
+        ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+        ³ NES4PC General Info ³
+        ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+
+  NES4PC is a Nintendo Entertainment System emulator for Windows 95/98/NT.
+It is programmed in Borland C++ Builder, and is entirely in C++, although I
+am working on a QBasic port out of curiosity, and in hopes that I'll find a
+bug in the windows CPU core by not making the same bug in the QBasic version
+and then comparing cores. =)
+  NES4PC is written by David de Regt, who goes by the nickname of AkIlLa^ in
+most internet places.  Yes, for those of you who recognize the nickname, I
+*AM* the one who did the FF3e translation that was furthest until AWJ/Som2
+did theirs.  But anyhoo...  On to the juicy tidbits of info.
+
+        ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+        ³ New in this version ³
+        ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+
+* CPU: Added two undocumented instructions
+* CPU: Fixed an addressing mode bug
+* CPU: Tweaked a few instructions
+* PPU: Fixed huge bug in vertical scrolling.  The game genie demo should be
+       perfect now.
+* PPU: Fixed 8x16 sprite display bug
+* PPU: Fixed NTSC/PAL display centering bug
+* PPU: Fixed background scrolling bug
+* PPU: Fixed large background color bug
+* Controllers: Paddle support added
+* Controllers: Initial Zapper support added
+* Mappers: Fixed a few MMC1 Bugs
+* Mappers: Finished initial MMC3 Implementation, although I don't know how
+           the IRQs are supposed to work...  NE1 wanna help me out with this?
+* General: A few minor speedups
+
+        ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+        ³ Expect next version ³
+        ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+
+* Mapper #15 (100-in-1)
+* SRAM Loading/Saving
+* More accurate mapper bank switching for all mappers
+* Automatic frameskip setting
+* Saving of settings into the system registry
+
+        ÚÄÄÄÄÄÄÄÄÄÄ¿
+        ³ Requests ³
+        ÀÄÄÄÄÄÄÄÄÄÄÙ
+
+1. Places to find ROMs to test mapper implementation on.  I've implemented
+   mappers but can't find ROMs to test the mappers with.
+2. Information on the zapper
+3. Any more mapper information than firebug's document provides since it's
+   vague in places
+4. If any games using mappers other than mapper #0 work perfectly or at least
+   are largely playable, please tell me!  I'm trying to compile a list of all
+   the games that are playable on NES4PC!
+
+        ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+        ³ Beta Testers ³
+        ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+
+  If you do not know who Y0SHi is, please continue to the next section.
+  If you do not know who Marat is, please place a large garbage bag with one
+of those drawstrings over your head, tighten the drawstring, tie it tightly,
+and sit down.  Don't worry, you'll meet all your ancestors soon.
+
+  OK, unless you're cheating or you just like skipping the first paragraph
+of a section, you know something about emulation.  I am looking for beta
+testers that preferably know something about the 6502, and wouldn't be
+clueless about using all the functions of my emulator.  If you think you
+are ready to commit at least a good few hours prior to each release version,
+then you might be the person for the job.  Look in the contacting the author
+section for my email address.  And if you think you're gonna be 31337 and
+get into my beta testing crew to release 31337 beta copies of my emulator,
+you are gonna have a surprise when I match the signature of the file to the
+copy I gave you (I will give each beta copy a unique signature in the file
+that you won't be able to find or for that matter, change).  You will then
+be prosecuted for breach of a confidentiality agreement.  No, I am not spiting
+bullshit here.  I can, and will, do the above stated if such a thing occurs.
+I don't want to, I'm just saying that I *CAN*.
+
+        ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+        ³ Contacting the Author ³
+        ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+
+Name:           David de Regt
+Location:       Bellevue, WA, USofA
+IRC:
+        UnderNet:       #gbinfow/#emu
+        EfNet:          #emu/#romhack
+Email:
+        For the next few weeks:         akilla@dycom.net
+        After the next few weeks:       akilla@earthlink.net
+
+  *BEFORE EMAILING*
+Remember, this is a BETA version.  This means I don't want bug reports since
+yes, I DO know that there are too many bugs to count.  The kind of emails I
+DO want are a list of ROMs that people have found that work on NES4PC and to
+what extent they work on it.  If you are really caring and actually use the
+debugging features to step through ROMs and figure out why it's not working
+right, PLEASE email me!  This is the type of email I *REALLY* want!
+
+        ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+        ³ Version History ³
+        ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+
+v0.12 Beta (11/9/98):
+* CPU: Added two undocumented instructions
+* CPU: Fixed an addressing mode bug
+* CPU: Tweaked a few instructions
+* PPU: Fixed huge bug in vertical scrolling.  The game genie demo should be
+       perfect now.
+* PPU: Fixed 8x16 sprite display bug
+* PPU: Fixed NTSC/PAL display centering bug
+* PPU: Fixed background scrolling bug
+* PPU: Fixed large background color bug
+* Controllers: Paddle support added
+* Controllers: Initial Zapper support added
+* Mappers: Fixed a few MMC1 Bugs
+* Mappers: Finished initial MMC3 Implementation, although I don't know how
+           the IRQs are supposed to work...  NE1 wanna help me out with this?
+* General: A few minor speedups
+
+v0.1 Beta (11/5/98):
+* First Version   
+
+        ÚÄÄÄÄÄÄÄÄÄÄ¿
+        ³ Features ³
+        ÀÄÄÄÄÄÄÄÄÄÄÙ
+
+ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÂÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÂÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+³ Part in question ³ Supported            ³ To Do                     ³
+ÆÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍØÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍØÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍµ
+³ 6502 CPU         ³ All documented op-   ³ If they prove to be used, ³
+³                  ³ codes and addressing ³ I'll implement some of    ³
+³                  ³ modes                ³ the undocumented opcodes  ³
+³                  ³                      ³ since I have info on them ³
+³                  ³ Three undocumented   ³                           ³
+³                  ³ instructions         ³ Accurate timing           ³
+³                  ³                      ³                           ³
+³                  ³                      ³ Possibly a re-write in    ³
+³                  ³                      ³ assembly (it's in C++ now)³
+ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+³ SRAM             ³ It's emulated in code³ Saving of SRAM to file,   ³
+³                  ³ but nothing is saved ³ loading of saved SRAM     ³
+³                  ³ to files yet.        ³                           ³
+ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+³ PPU              ³ All mirroring, pal-  ³ Accurate timing           ³
+³                  ³ ettes, scrolling,    ³                           ³
+³                  ³ sprites (8x8 & 8x16),³ HBlank detection and det- ³
+³                  ³ sprite flipping,     ³ ecting for sprite 0 hits  ³
+³                  ³ sprite priority      ³ for generating interrupts.³
+³                  ³                      ³                           ³
+³                  ³ Variable frameskip & ³ Autoframeskipping         ³
+³                  ³ FPS meter.           ³                           ³
+ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+³ pAPU             ³ Pulse and triangle   ³ Noise channel and DMC.    ³
+³                  ³ channels emulated    ³                           ³
+³                  ³ in code.             ³                           ³
+ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+³ Mappers          ³ Fully Supported and  ³ Well, the rest of them, of³
+³                  ³ Tested:              ³ course!                   ³
+³                  ³ 0, 1, 2, 3, 4, 7     ³                           ³
+³                  ³                      ³ Fixes to the current ones ³
+³                  ³ Fully Supported and  ³                           ³
+³                  ³ Untested:            ³                           ³
+³                  ³ 8, 11, 34, 66, 71, 78³                           ³
+ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+³ Controllers      ³ 2 Joypads using the  ³ 4 Controllers             ³
+³                  ³ keyboard             ³                           ³
+³                  ³                      ³ Full Zapper               ³
+³                  ³ Paddle               ³                           ³
+³                  ³                      ³ DirectInput               ³
+³                  ³ Preliminary Zapper   ³                           ³
+ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+³ Graphics Modes   ³ 24-bit, 16-bit,      ³ Full 8-bit color support, ³
+³                  ³ partial 8-bit.       ³ maybe 32-bit if I care to.³
+³                  ³                      ³                           ³
+³                  ³                      ³ DirectDraw                ³
+ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+³ Sound            ³ Crappy Pulse 1 and 2 ³ Fixed Pulse 1/2 output,   ³
+³                  ³ sound output.        ³ Triangle, Noise, and DMC  ³
+³                  ³                      ³ output.                   ³
+ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+³ Game Genie       ³ None                 ³ Full Support for 6 and 8  ³
+³                  ³                      ³ letter long codes.        ³
+ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+³ Debugger         ³ Hugely extensive     ³ The Disassembler is almost³
+³                  ³ debugger, has every- ³ complete.  After that, I  ³
+³                  ³ thing you'd need to  ³ might add pattern table   ³
+³                  ³ test and debug a     ³ editing and saving.       ³
+³                  ³ game you wrote or    ³                           ³
+³                  ³ to simply find out   ³                           ³
+³                  ³ where the lives var- ³                           ³
+³                  ³ iable is stored. =)  ³                           ³
+ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÁÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÁÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+
+        ÚÄÄÄÄÄÄÄÄ¿
+        ³ Thanks ³
+        ÀÄÄÄÄÄÄÄÄÙ
+
+Johannes Holmberg, programmer of unNESsential, for having made the
+  same 6502 CPU bugs as me while programming it, and telling
+  me how to fix them, as well as providing tips for various
+  other aspects of emulating the NES, and lastly for beta-
+  testing the emulator!
+
+Y0SHi, for his personal answers to my nagging questions and for
+  giving me confidential material of his which I won't mention
+  but he knows what I'm talking about.  Let's just say it
+  really REALLY helped!

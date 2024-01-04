@@ -1,0 +1,20 @@
+Write:
+Header - Done
+BASR - x
+MEMR - Done
+SOUN - Done
+VRAM - Done
+CNTR - x
+SRAM - Done
+MPRD - Done
+
+
+Read:
+Header - Done
+BASR - x
+MEMR - x
+SOUN - x
+VRAM - x
+CNTR - x
+SRAM - x
+MPRD - x

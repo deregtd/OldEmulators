@@ -1,0 +1,926 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#define APSTUDIO_HIDDEN_SYMBOLS
+#include "windows.h"
+#undef APSTUDIO_HIDDEN_SYMBOLS
+#include "resource.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDM_NES_MENU MENU DISCARDABLE 
+BEGIN
+    POPUP "&File"
+    BEGIN
+        MENUITEM "&Open\tCtrl-O",               IDM_OPEN
+        MENUITEM SEPARATOR
+        MENUITEM "E&xit\tAlt-F4",               IDM_EXIT
+    END
+    POPUP "&Emulation"
+    BEGIN
+        MENUITEM "&Start\tF5",                  ID_EMULATION_START
+        MENUITEM "St&ep\tF10",                  ID_EMULATION_STEP
+        MENUITEM "S&top\tShift-F5",             ID_EMULATION_STOP
+        MENUITEM SEPARATOR
+        MENUITEM "&Reset\tShift-F9",            ID_EMULATION_RESET
+        MENUITEM SEPARATOR
+        POPUP "&CPU Mode"
+        BEGIN
+            MENUITEM "&NTSC",                       ID_EMULATION_CPUMODE_NTSC
+            , CHECKED
+            MENUITEM "&PAL",                        ID_EMULATION_CPUMODE_PAL
+        END
+        POPUP "&PPU Mode"
+        BEGIN
+            MENUITEM "&Pixel-Based",                ID_EMULATION_PPUMODE_PIXELBASED
+            , CHECKED
+            MENUITEM "Scanline-Based",              ID_EMULATION_PPUMODE_SCANLINEBASED
+
+            MENUITEM "Tile-Based",                  ID_EMULATION_PPUMODE_TILEBASED
+
+        END
+    END
+    POPUP "&States"
+    BEGIN
+        MENUITEM "&Save State\tF4",             ID_STATES_SAVESTATE
+        MENUITEM "&Load State\tF7",             ID_STATES_LOADSTATE
+    END
+    POPUP "&Options"
+    BEGIN
+        MENUITEM "Double&Size Mode\tCtrl-D",    ID_OPTIONS_DOUBLESIZEMODE
+        MENUITEM SEPARATOR
+        MENUITEM "3D &Hardware Acceleration\tCtrl-H", 
+                                                ID_OPTIONS_3DHARDWAREACCELERATION
+
+        POPUP "&Filtering Mode"
+        BEGIN
+            MENUITEM "Point (None)\tCtrl-Alt-1",    ID_OPTIONS_FILTERINGMODE_POINTNONE
+
+            MENUITEM "Linear\tCtrl-Alt-2",          ID_OPTIONS_FILTERINGMODE_LINEAR
+
+            MENUITEM "Cubic\tCtrl-Alt-3",           ID_OPTIONS_FILTERINGMODE_CUBIC
+
+        END
+        MENUITEM SEPARATOR
+        MENUITEM "&AutoFrameSkip\tCtrl-A",      ID_OPTIONS_AUTOFRAMESKIP
+        , CHECKED
+        MENUITEM "Decrease Frameskip\t-",       ID_OPTIONS_DECREASEFRAMESKIP
+        MENUITEM "Increase Frameskip\t+",       ID_OPTIONS_INCREASEFRAMESKIP
+        MENUITEM SEPARATOR
+        MENUITEM "Sound &Enabled\tCtrl-S",      ID_OPTIONS_SOUNDON, CHECKED
+        MENUITEM "Sound &Options\tCtrl-Alt-Shift-S", ID_OPTIONS_SOUNDOPTIONS
+        MENUITEM SEPARATOR
+        MENUITEM "&Controller Config",          ID_OPTIONS_CONTROLLERCONFIG
+        MENUITEM SEPARATOR
+        POPUP "&Debugging Level"
+        BEGIN
+            MENUITEM "Off\tCtrl-F1",                ID_DEBUG_OFF
+            MENUITEM "Low (Palette + Pattern Tables)\tCtrl-F2", ID_DEBUG_LOW
+            MENUITEM "Medium (Low + Name Tables)\tCtrl-F3", ID_DEBUG_MEDIUM
+            MENUITEM "High (Medium + Registers/Trace)\tCtrl-F4", 
+                                                    ID_DEBUG_HIGH
+        END
+        MENUITEM "Clear All &Breakpoints",      ID_OPTIONS_CLEARALLBREAKPOINTS
+
+    END
+    POPUP "&Help"
+    BEGIN
+        MENUITEM "&About ...",                  IDM_ABOUT
+    END
+END
+
+IDM_DEFMENU MENU DISCARDABLE 
+BEGIN
+    POPUP "&File"
+    BEGIN
+        MENUITEM "&Open\tCtrl-O",               IDM_OPEN
+        MENUITEM SEPARATOR
+        MENUITEM "E&xit\tAlt-F4",               IDM_EXIT
+    END
+    POPUP "&Help"
+    BEGIN
+        MENUITEM "&About ...",                  IDM_ABOUT
+    END
+END
+
+IDM_A26_MENU MENU DISCARDABLE 
+BEGIN
+    POPUP "&File"
+    BEGIN
+        MENUITEM "&Open\tCtrl-O",               IDM_OPEN
+        MENUITEM SEPARATOR
+        MENUITEM "E&xit\tAlt-F4",               IDM_EXIT
+    END
+    POPUP "&Emulation"
+    BEGIN
+        MENUITEM "&Start\tF5",                  ID_EMULATION_START
+        MENUITEM "Ste&p\tF10",                  ID_EMULATION_STEP
+        MENUITEM "S&top\tShift-F5",             ID_EMULATION_STOP
+        MENUITEM SEPARATOR
+        MENUITEM "&Reset\tShift-F9",            ID_EMULATION_RESET
+    END
+    POPUP "&States", GRAYED
+    BEGIN
+        MENUITEM "&Save State\tF4",             ID_STATES_SAVESTATE
+        MENUITEM "&Load State\tF7",             ID_STATES_LOADSTATE
+    END
+    POPUP "&Options"
+    BEGIN
+        MENUITEM "Double&Size Mode\tCtrl-D",    ID_OPTIONS_DOUBLESIZEMODE
+        MENUITEM SEPARATOR
+        MENUITEM "3D &Hardware Acceleration\tCtrl-H", 
+                                                ID_OPTIONS_3DHARDWAREACCELERATION
+
+        POPUP "&Filtering Mode"
+        BEGIN
+            MENUITEM "Point (None)\tCtrl-Alt-1",    ID_OPTIONS_FILTERINGMODE_POINTNONE
+
+            MENUITEM "Linear\tCtrl-Alt-2",          ID_OPTIONS_FILTERINGMODE_LINEAR
+
+            MENUITEM "Cubic\tCtrl-Alt-3",           ID_OPTIONS_FILTERINGMODE_CUBIC
+
+        END
+        MENUITEM SEPARATOR
+        MENUITEM "&AutoFrameSkip\tCtrl-A",      ID_OPTIONS_AUTOFRAMESKIP
+        , CHECKED
+        MENUITEM "Decrease Frameskip\t-",       ID_OPTIONS_DECREASEFRAMESKIP
+        MENUITEM "Increase Frameskip\t+",       ID_OPTIONS_INCREASEFRAMESKIP
+        MENUITEM SEPARATOR
+        MENUITEM "Sound &Enabled\tCtrl-S",      ID_OPTIONS_SOUNDON
+        , CHECKED, GRAYED
+        MENUITEM "Sound &Options\tCtrl-Alt-Shift-S", ID_OPTIONS_SOUNDOPTIONS
+        , GRAYED
+        MENUITEM SEPARATOR
+        MENUITEM "&Controller Config",          ID_OPTIONS_CONTROLLERCONFIG
+        POPUP "Controller &Mode"
+        BEGIN
+            MENUITEM "&Paddles",                    ID_OPTIONS_CONTROLLERMODE_PADDLES
+
+            MENUITEM "&Joysticks",                  ID_OPTIONS_CONTROLLERMODE_JOYSTICKS
+
+        END
+        MENUITEM SEPARATOR
+        POPUP "&Debugging Level"
+        BEGIN
+            MENUITEM "Off\tCtrl-F1",                ID_DEBUG_OFF
+            MENUITEM "Low (Dumps)\tCtrl-F2",        ID_DEBUG_LOW
+            MENUITEM "Medium (Useless)\tCtrl-F3",   ID_DEBUG_MEDIUM
+            MENUITEM "High (Medium + Registers/Trace)\tCtrl-F4", 
+                                                    ID_DEBUG_HIGH
+        END
+        MENUITEM "Clear All &Breakpoints",      ID_OPTIONS_CLEARALLBREAKPOINTS
+
+    END
+    POPUP "&Help"
+    BEGIN
+        MENUITEM "&About ...",                  IDM_ABOUT
+    END
+END
+
+IDM_GEN_MENU MENU DISCARDABLE 
+BEGIN
+    POPUP "&File"
+    BEGIN
+        MENUITEM "&Open\tCtrl-O",               IDM_OPEN
+        MENUITEM SEPARATOR
+        MENUITEM "E&xit\tAlt-F4",               IDM_EXIT
+    END
+    POPUP "&Emulation"
+    BEGIN
+        MENUITEM "&Start\tF5",                  ID_EMULATION_START
+        MENUITEM "Ste&p\tF10",                  ID_EMULATION_STEP
+        MENUITEM "S&top\tShift-F5",             ID_EMULATION_STOP
+        MENUITEM SEPARATOR
+        MENUITEM "&Reset\tShift-F9",            ID_EMULATION_RESET
+    END
+    POPUP "&Options"
+    BEGIN
+        MENUITEM "Double&Size Mode\tCtrl-D",    ID_OPTIONS_DOUBLESIZEMODE
+        MENUITEM SEPARATOR
+        MENUITEM "3D &Hardware Acceleration\tCtrl-H", 
+                                                ID_OPTIONS_3DHARDWAREACCELERATION
+
+        POPUP "&Filtering Mode"
+        BEGIN
+            MENUITEM "Point (None)\tCtrl-Alt-1",    ID_OPTIONS_FILTERINGMODE_POINTNONE
+
+            MENUITEM "Linear\tCtrl-Alt-2",          ID_OPTIONS_FILTERINGMODE_LINEAR
+
+            MENUITEM "Cubic\tCtrl-Alt-3",           ID_OPTIONS_FILTERINGMODE_CUBIC
+
+        END
+        MENUITEM SEPARATOR
+        MENUITEM "&AutoFrameSkip\tCtrl-A",      ID_OPTIONS_AUTOFRAMESKIP
+        , CHECKED
+        MENUITEM "Decrease Frameskip\t-",       ID_OPTIONS_DECREASEFRAMESKIP
+        MENUITEM "Increase Frameskip\t+",       ID_OPTIONS_INCREASEFRAMESKIP
+        MENUITEM SEPARATOR
+        POPUP "&Debugging Level"
+        BEGIN
+            MENUITEM "Off\tCtrl-F1",                ID_DEBUG_OFF
+            MENUITEM "Low (Palette + Pattern Tables)\tCtrl-F2", ID_DEBUG_LOW
+            MENUITEM "Medium (Low + Name Tables)\tCtrl-F3", ID_DEBUG_MEDIUM
+            MENUITEM "High (Medium + Registers/Trace)\tCtrl-F4", 
+                                                    ID_DEBUG_HIGH
+        END
+        MENUITEM "Clear All &Breakpoints",      ID_OPTIONS_CLEARALLBREAKPOINTS
+
+    END
+    POPUP "&Help"
+    BEGIN
+        MENUITEM "&About ...",                  IDM_ABOUT
+    END
+END
+
+IDM_COL_MENU MENUEX DISCARDABLE 
+BEGIN
+    POPUP "&File",                          65535,MFT_STRING,MFS_ENABLED
+    BEGIN
+        MENUITEM "&Open\tCtrl-O",               32772,MFT_STRING,MFS_ENABLED
+        MENUITEM MFT_SEPARATOR
+        MENUITEM "E&xit\tAlt-F4",               105,MFT_STRING,MFS_ENABLED
+    END
+    POPUP "&Emulation",                     65535,MFT_STRING,MFS_ENABLED
+    BEGIN
+        MENUITEM "&Start\tF5",                  32773,MFT_STRING,MFS_ENABLED
+        MENUITEM "St&ep\tF10",                  32775,MFT_STRING,MFS_ENABLED
+        MENUITEM "S&top\tShift-F5",             32774,MFT_STRING,MFS_ENABLED
+        MENUITEM MFT_SEPARATOR
+        MENUITEM "&Reset\tShift-F9",            32776,MFT_STRING,MFS_ENABLED
+    END
+    POPUP "&Options",                       65535,MFT_STRING,MFS_ENABLED
+    BEGIN
+        MENUITEM "Double&Size Mode\tCtrl-D",    32777,MFT_STRING,MFS_ENABLED
+        MENUITEM MFT_SEPARATOR
+        MENUITEM "3D &Hardware Acceleration\tCtrl-H", 32790,MFT_STRING,
+        MFS_ENABLED
+        POPUP "&Filtering Mode",                65535,MFT_STRING,MFS_ENABLED
+        BEGIN
+            MENUITEM "Point (None)\tCtrl-Alt-1",    32792,MFT_STRING,
+            MFS_ENABLED
+            MENUITEM "Linear\tCtrl-Alt-2",          32793,MFT_STRING,
+            MFS_ENABLED
+            MENUITEM "Cubic\tCtrl-Alt-3",           32795,MFT_STRING,
+            MFS_ENABLED
+        END
+        MENUITEM MFT_SEPARATOR
+        MENUITEM "&AutoFrameSkip\tCtrl-A",      32787,MFT_STRING,MFS_CHECKED
+        MENUITEM "Decrease Frameskip\t-",       32789,MFT_STRING,MFS_ENABLED
+        MENUITEM "Increase Frameskip\t+",       32788,MFT_STRING,MFS_ENABLED
+        MENUITEM MFT_SEPARATOR
+        MENUITEM "&Controller Config",          32804,MFT_STRING,MFS_ENABLED
+        MENUITEM MFT_SEPARATOR
+        POPUP "&Debugging Level",               65535,MFT_STRING,MFS_ENABLED
+        BEGIN
+            MENUITEM "Off\tCtrl-F1",                32779,MFT_STRING,
+            MFS_ENABLED
+            MENUITEM "Low (Palette + Pattern Tables)\tCtrl-F2", 32780,
+            MFT_STRING,MFS_ENABLED
+            MENUITEM "Medium (Low + Name Tables)\tCtrl-F3", 32781,MFT_STRING,
+            MFS_ENABLED
+            MENUITEM "High (Medium + Registers/Trace)\tCtrl-F4", 32782,
+            MFT_STRING,MFS_ENABLED
+        END
+        MENUITEM "Clear All &Breakpoints",      32786,MFT_STRING,MFS_ENABLED
+    END
+    POPUP "&Help",                          65535,
+    MFT_STRING | MFT_RIGHTORDER | MFT_RIGHTJUSTIFY,MFS_ENABLED
+    BEGIN
+        MENUITEM "&About ...",                  104,MFT_STRING,MFS_ENABLED
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Accelerator
+//
+
+IDR_NES_ACCEL ACCELERATORS MOVEABLE PURE 
+BEGIN
+    "1",            ID_OPTIONS_FILTERINGMODE_POINTNONE, VIRTKEY, CONTROL, 
+                                                    ALT, NOINVERT
+    "2",            ID_OPTIONS_FILTERINGMODE_LINEAR, VIRTKEY, CONTROL, ALT, 
+                                                    NOINVERT
+    "3",            ID_OPTIONS_FILTERINGMODE_CUBIC, VIRTKEY, CONTROL, ALT, 
+                                                    NOINVERT
+    "A",            ID_OPTIONS_AUTOFRAMESKIP, VIRTKEY, CONTROL, NOINVERT
+    "D",            ID_OPTIONS_DOUBLESIZEMODE, VIRTKEY, CONTROL, NOINVERT
+    "H",            ID_OPTIONS_3DHARDWAREACCELERATION, VIRTKEY, CONTROL, 
+                                                    NOINVERT
+    "O",            IDM_OPEN,               VIRTKEY, CONTROL, NOINVERT
+    "S",            ID_OPTIONS_SOUNDON,     VIRTKEY, CONTROL, NOINVERT
+    "S",            ID_OPTIONS_SOUNDOPTIONS, VIRTKEY, SHIFT, CONTROL, ALT, 
+                                                    NOINVERT
+    VK_ADD,         ID_OPTIONS_INCREASEFRAMESKIP, VIRTKEY, NOINVERT
+    VK_F1,          ID_DEBUG_OFF,           VIRTKEY, CONTROL, NOINVERT
+    VK_F10,         ID_EMULATION_STEP,      VIRTKEY, NOINVERT
+    VK_F2,          ID_DEBUG_LOW,           VIRTKEY, CONTROL, NOINVERT
+    VK_F3,          ID_DEBUG_MEDIUM,        VIRTKEY, CONTROL, NOINVERT
+    VK_F4,          ID_STATES_SAVESTATE,    VIRTKEY, NOINVERT
+    VK_F4,          ID_DEBUG_HIGH,          VIRTKEY, CONTROL, NOINVERT
+    VK_F5,          ID_EMULATION_START,     VIRTKEY, NOINVERT
+    VK_F5,          ID_DEBUG_ULTRAHIGH,     VIRTKEY, CONTROL, NOINVERT
+    VK_F5,          ID_EMULATION_STOP,      VIRTKEY, SHIFT, NOINVERT
+    VK_F7,          ID_STATES_LOADSTATE,    VIRTKEY, NOINVERT
+    VK_F9,          ID_EMULATION_RESET,     VIRTKEY, SHIFT, NOINVERT
+    VK_SUBTRACT,    ID_OPTIONS_DECREASEFRAMESKIP, VIRTKEY, NOINVERT
+END
+
+IDR_DEFACCEL ACCELERATORS DISCARDABLE 
+BEGIN
+    "O",            IDM_OPEN,               VIRTKEY, CONTROL, NOINVERT
+END
+
+IDR_A26_ACCEL ACCELERATORS MOVEABLE PURE 
+BEGIN
+    "1",            ID_OPTIONS_FILTERINGMODE_POINTNONE, VIRTKEY, CONTROL, 
+                                                    ALT, NOINVERT
+    "2",            ID_OPTIONS_FILTERINGMODE_LINEAR, VIRTKEY, CONTROL, ALT, 
+                                                    NOINVERT
+    "3",            ID_OPTIONS_FILTERINGMODE_CUBIC, VIRTKEY, CONTROL, ALT, 
+                                                    NOINVERT
+    "A",            ID_OPTIONS_AUTOFRAMESKIP, VIRTKEY, CONTROL, NOINVERT
+    "D",            ID_OPTIONS_DOUBLESIZEMODE, VIRTKEY, CONTROL, NOINVERT
+    "H",            ID_OPTIONS_3DHARDWAREACCELERATION, VIRTKEY, CONTROL, 
+                                                    NOINVERT
+    "O",            IDM_OPEN,               VIRTKEY, CONTROL, NOINVERT
+    "S",            ID_OPTIONS_SOUNDON,     VIRTKEY, CONTROL, NOINVERT
+    "S",            ID_OPTIONS_SOUNDOPTIONS, VIRTKEY, SHIFT, CONTROL, ALT, 
+                                                    NOINVERT
+    VK_ADD,         ID_OPTIONS_INCREASEFRAMESKIP, VIRTKEY, NOINVERT
+    VK_F1,          ID_DEBUG_OFF,           VIRTKEY, CONTROL, NOINVERT
+    VK_F10,         ID_EMULATION_STEP,      VIRTKEY, NOINVERT
+    VK_F2,          ID_DEBUG_LOW,           VIRTKEY, CONTROL, NOINVERT
+    VK_F3,          ID_DEBUG_MEDIUM,        VIRTKEY, CONTROL, NOINVERT
+    VK_F4,          ID_DEBUG_HIGH,          VIRTKEY, CONTROL, NOINVERT
+    VK_F5,          ID_EMULATION_START,     VIRTKEY, NOINVERT
+    VK_F5,          ID_DEBUG_ULTRAHIGH,     VIRTKEY, CONTROL, NOINVERT
+    VK_F5,          ID_EMULATION_STOP,      VIRTKEY, SHIFT, NOINVERT
+    VK_F9,          ID_EMULATION_RESET,     VIRTKEY, SHIFT, NOINVERT
+    VK_SUBTRACT,    ID_OPTIONS_DECREASEFRAMESKIP, VIRTKEY, NOINVERT
+END
+
+IDR_GEN_ACCEL ACCELERATORS MOVEABLE PURE 
+BEGIN
+    "1",            ID_OPTIONS_FILTERINGMODE_POINTNONE, VIRTKEY, CONTROL, 
+                                                    ALT, NOINVERT
+    "2",            ID_OPTIONS_FILTERINGMODE_LINEAR, VIRTKEY, CONTROL, ALT, 
+                                                    NOINVERT
+    "3",            ID_OPTIONS_FILTERINGMODE_CUBIC, VIRTKEY, CONTROL, ALT, 
+                                                    NOINVERT
+    "A",            ID_OPTIONS_AUTOFRAMESKIP, VIRTKEY, CONTROL, NOINVERT
+    "D",            ID_OPTIONS_DOUBLESIZEMODE, VIRTKEY, CONTROL, NOINVERT
+    "H",            ID_OPTIONS_3DHARDWAREACCELERATION, VIRTKEY, CONTROL, 
+                                                    NOINVERT
+    "O",            IDM_OPEN,               VIRTKEY, CONTROL, NOINVERT
+    "S",            ID_OPTIONS_SOUNDON,     VIRTKEY, CONTROL, NOINVERT
+    "S",            ID_OPTIONS_SOUNDOPTIONS, VIRTKEY, SHIFT, CONTROL, ALT, 
+                                                    NOINVERT
+    VK_ADD,         ID_OPTIONS_INCREASEFRAMESKIP, VIRTKEY, NOINVERT
+    VK_F1,          ID_DEBUG_OFF,           VIRTKEY, CONTROL, NOINVERT
+    VK_F10,         ID_EMULATION_STEP,      VIRTKEY, NOINVERT
+    VK_F2,          ID_DEBUG_LOW,           VIRTKEY, CONTROL, NOINVERT
+    VK_F3,          ID_DEBUG_MEDIUM,        VIRTKEY, CONTROL, NOINVERT
+    VK_F4,          ID_STATES_SAVESTATE,    VIRTKEY, NOINVERT
+    VK_F4,          ID_DEBUG_HIGH,          VIRTKEY, CONTROL, NOINVERT
+    VK_F5,          ID_EMULATION_START,     VIRTKEY, NOINVERT
+    VK_F5,          ID_DEBUG_ULTRAHIGH,     VIRTKEY, CONTROL, NOINVERT
+    VK_F5,          ID_EMULATION_STOP,      VIRTKEY, SHIFT, NOINVERT
+    VK_F7,          ID_STATES_LOADSTATE,    VIRTKEY, NOINVERT
+    VK_F9,          ID_EMULATION_RESET,     VIRTKEY, SHIFT, NOINVERT
+    VK_SUBTRACT,    ID_OPTIONS_DECREASEFRAMESKIP, VIRTKEY, NOINVERT
+END
+
+IDR_COL_ACCEL ACCELERATORS MOVEABLE PURE 
+BEGIN
+    "1",            ID_OPTIONS_FILTERINGMODE_POINTNONE, VIRTKEY, CONTROL, 
+                                                    ALT, NOINVERT
+    "2",            ID_OPTIONS_FILTERINGMODE_LINEAR, VIRTKEY, CONTROL, ALT, 
+                                                    NOINVERT
+    "3",            ID_OPTIONS_FILTERINGMODE_CUBIC, VIRTKEY, CONTROL, ALT, 
+                                                    NOINVERT
+    "A",            ID_OPTIONS_AUTOFRAMESKIP, VIRTKEY, CONTROL, NOINVERT
+    "D",            ID_OPTIONS_DOUBLESIZEMODE, VIRTKEY, CONTROL, NOINVERT
+    "H",            ID_OPTIONS_3DHARDWAREACCELERATION, VIRTKEY, CONTROL, 
+                                                    NOINVERT
+    "O",            IDM_OPEN,               VIRTKEY, CONTROL, NOINVERT
+    VK_ADD,         ID_OPTIONS_INCREASEFRAMESKIP, VIRTKEY, NOINVERT
+    VK_F1,          ID_DEBUG_OFF,           VIRTKEY, CONTROL, NOINVERT
+    VK_F10,         ID_EMULATION_STEP,      VIRTKEY, NOINVERT
+    VK_F2,          ID_DEBUG_LOW,           VIRTKEY, CONTROL, NOINVERT
+    VK_F3,          ID_DEBUG_MEDIUM,        VIRTKEY, CONTROL, NOINVERT
+    VK_F4,          ID_DEBUG_HIGH,          VIRTKEY, CONTROL, NOINVERT
+    VK_F5,          ID_EMULATION_START,     VIRTKEY, NOINVERT
+    VK_F5,          ID_DEBUG_ULTRAHIGH,     VIRTKEY, CONTROL, NOINVERT
+    VK_F5,          ID_EMULATION_STOP,      VIRTKEY, SHIFT, NOINVERT
+    VK_F9,          ID_EMULATION_RESET,     VIRTKEY, SHIFT, NOINVERT
+    VK_SUBTRACT,    ID_OPTIONS_DECREASEFRAMESKIP, VIRTKEY, NOINVERT
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_ABOUTBOX DIALOG DISCARDABLE  22, 17, 141, 68
+STYLE DS_MODALFRAME | WS_CAPTION | WS_SYSMENU
+CAPTION "About"
+FONT 8, "System"
+BEGIN
+    LTEXT           "NinthStar Version 0.01",IDC_STATIC,0,7,99,10,
+                    SS_NOPREFIX
+    DEFPUSHBUTTON   "OK",IDOK,1,55,30,11,WS_GROUP
+    LTEXT           "NinthStar 0.01:                                             Play your favourite NES games on your Windows PC.",
+                    IDC_STATIC,0,23,140,28,SS_SUNKEN | WS_BORDER
+    ICON            IDI_NINTHSTAR,IDC_STATIC,121,2,20,20
+    LTEXT           "www.NinthStar.org",IDC_STATIC,80,58,61,8
+END
+
+IDD_NES_PALETTE DIALOG DISCARDABLE  0, 0, 177, 31
+STYLE WS_POPUP | WS_CAPTION
+CAPTION "Palette"
+FONT 8, "MS Sans Serif"
+BEGIN
+END
+
+IDD_NES_PATTERN DIALOG DISCARDABLE  0, 0, 186, 95
+STYLE WS_POPUP | WS_CAPTION
+CAPTION "Pattern Tables"
+FONT 8, "MS Sans Serif"
+BEGIN
+END
+
+IDD_NAME DIALOG DISCARDABLE  0, 0, 322, 218
+STYLE WS_POPUP | WS_CAPTION
+CAPTION "Name Tables"
+FONT 8, "MS Sans Serif"
+BEGIN
+END
+
+IDD_NES_DUMPS DIALOG DISCARDABLE  0, 0, 186, 95
+STYLE WS_POPUP | WS_CAPTION
+CAPTION "Dumps/Commands"
+FONT 8, "MS Sans Serif"
+BEGIN
+    PUSHBUTTON      "Dump PPU Memory",IDC_DUMP_PPU_MEM,7,7,71,12
+    PUSHBUTTON      "Start Logging",IDC_START_LOGGING,79,7,71,12
+    PUSHBUTTON      "Stop Logging",IDC_STOP_LOGGING,79,19,71,12
+    PUSHBUTTON      "IRQ",IDC_IRQBUTTON,7,19,71,12
+END
+
+IDD_NES_TRACE DIALOG DISCARDABLE  0, 0, 186, 125
+STYLE WS_POPUP | WS_CAPTION
+CAPTION "CPU Trace"
+FONT 8, "MS Sans Serif"
+BEGIN
+END
+
+IDD_NES_REGISTERS DIALOG DISCARDABLE  0, 0, 186, 95
+STYLE WS_POPUP | WS_CAPTION
+CAPTION "Registers"
+FONT 8, "MS Sans Serif"
+BEGIN
+END
+
+IDD_A26_DUMPS DIALOG DISCARDABLE  0, 0, 186, 95
+STYLE WS_POPUP | WS_CAPTION
+CAPTION "Dumps/Commands"
+FONT 8, "MS Sans Serif"
+BEGIN
+    PUSHBUTTON      "Start Logging",IDC_START_LOGGING,79,7,71,12
+    PUSHBUTTON      "Stop Logging",IDC_STOP_LOGGING,79,19,71,12
+END
+
+IDD_A26_REGISTERS DIALOG DISCARDABLE  0, 0, 186, 95
+STYLE WS_POPUP | WS_CAPTION
+CAPTION "Registers"
+FONT 8, "MS Sans Serif"
+BEGIN
+END
+
+IDD_A26_TRACE DIALOG DISCARDABLE  0, 0, 186, 125
+STYLE WS_POPUP | WS_CAPTION
+CAPTION "CPU Trace"
+FONT 8, "MS Sans Serif"
+BEGIN
+END
+
+IDD_GEN_DUMPS DIALOG DISCARDABLE  0, 0, 186, 95
+STYLE WS_POPUP | WS_CAPTION
+CAPTION "Dumps/Commands"
+FONT 8, "MS Sans Serif"
+BEGIN
+    PUSHBUTTON      "Start Logging",IDC_START_LOGGING,79,7,71,12
+    PUSHBUTTON      "Stop Logging",IDC_STOP_LOGGING,79,19,71,12
+END
+
+IDD_GEN_REGISTERS DIALOG DISCARDABLE  0, 0, 186, 95
+STYLE WS_POPUP | WS_CAPTION
+CAPTION "Registers"
+FONT 8, "MS Sans Serif"
+BEGIN
+END
+
+IDD_GEN_TRACE DIALOG DISCARDABLE  0, 0, 186, 125
+STYLE WS_POPUP | WS_CAPTION
+CAPTION "CPU Trace"
+FONT 8, "MS Sans Serif"
+BEGIN
+END
+
+IDD_NES_CONTROLLERS DIALOG DISCARDABLE  0, 0, 344, 220
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION
+CAPTION "Controller Config"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "Close",ID_CONTROLLERDIALOG_OK,145,199,50,14
+    COMBOBOX        IDC_NES_CONTROLLERS_PLAYER_COMBO,123,7,97,58,
+                    CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    GROUPBOX        "Arrows",IDC_STATIC,7,52,330,69
+    GROUPBOX        "Buttons",IDC_STATIC,7,126,330,69,WS_GROUP
+    LTEXT           "A Button",IDC_STATIC,14,140,33,13
+    LTEXT           "B Button",IDC_STATIC,14,153,33,13
+    LTEXT           "Select",IDC_STATIC,14,166,33,13
+    LTEXT           "Start",IDC_STATIC,14,179,33,13
+    COMBOBOX        IDC_NES_CNT_A_DEVICE,49,137,200,61,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_GROUP | WS_TABSTOP
+    COMBOBOX        IDC_NES_CNT_A_KEY,257,137,73,76,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_GROUP | WS_TABSTOP
+    COMBOBOX        IDC_NES_CNT_B_DEVICE,49,150,200,65,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_GROUP | WS_TABSTOP
+    COMBOBOX        IDC_NES_CNT_SEL_DEVICE,49,164,200,63,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_GROUP | WS_TABSTOP
+    COMBOBOX        IDC_NES_CNT_STR_DEVICE,49,177,200,58,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_GROUP | WS_TABSTOP
+    COMBOBOX        IDC_NES_CNT_B_KEY,257,150,73,72,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_GROUP | WS_TABSTOP
+    COMBOBOX        IDC_NES_CNT_SEL_KEY,257,164,73,75,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_GROUP | WS_TABSTOP
+    COMBOBOX        IDC_NES_CNT_STR_KEY,257,177,73,73,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_GROUP | WS_TABSTOP
+    LTEXT           "Up",IDC_STATIC,14,66,33,13
+    LTEXT           "Down",IDC_STATIC,14,78,33,13
+    LTEXT           "Left",IDC_STATIC,14,91,33,13
+    LTEXT           "Right",IDC_STATIC,14,104,33,13
+    COMBOBOX        IDC_NES_CNT_UP_DEVICE,49,63,200,61,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_NES_CNT_UP_KEY,257,63,73,68,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_NES_CNT_DOWN_DEVICE,49,76,200,65,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_NES_CNT_LEFT_DEVICE,49,90,200,63,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_NES_CNT_RIGHT_DEVICE,49,102,200,58,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_NES_CNT_DOWN_KEY,257,76,73,72,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_NES_CNT_LEFT_KEY,257,90,73,75,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_NES_CNT_RIGHT_KEY,257,102,73,73,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "AutoConfigure To:",IDC_NES_CNT_AUTOCONFIGTO,13,30,75,14
+    COMBOBOX        IDC_NES_CNT_AUTOCONFIGCOMBO,96,31,232,87,
+                    CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    GROUPBOX        "Autoconfigure",IDC_STATIC,7,21,330,27
+END
+
+IDD_A26_CONTROLLERS DIALOG DISCARDABLE  0, 0, 344, 183
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION
+CAPTION "Controller Config"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "Close",ID_CONTROLLERDIALOG_OK,145,161,50,14
+    COMBOBOX        IDC_A26_CONTROLLERS_PLAYER_COMBO,123,7,97,58,
+                    CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    GROUPBOX        "Arrows",IDC_STATIC,7,52,330,69
+    GROUPBOX        "Buttons",IDC_STATIC,7,126,330,28,WS_GROUP
+    LTEXT           "Button",IDC_STATIC,14,140,33,13
+    COMBOBOX        IDC_A26_CNT_BUT_DEVICE,49,137,200,61,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_GROUP | WS_TABSTOP
+    COMBOBOX        IDC_A26_CNT_BUT_KEY,257,137,73,76,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_GROUP | WS_TABSTOP
+    LTEXT           "Up",IDC_STATIC,14,66,33,13
+    LTEXT           "Down",IDC_STATIC,14,78,33,13
+    LTEXT           "Left",IDC_STATIC,14,91,33,13
+    LTEXT           "Right",IDC_STATIC,14,104,33,13
+    COMBOBOX        IDC_A26_CNT_UP_DEVICE,49,63,200,61,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_A26_CNT_UP_KEY,257,63,73,68,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "AutoConfigure To:",IDC_A26_CNT_AUTOCONFIGTO,13,30,75,14
+    COMBOBOX        IDC_A26_CNT_AUTOCONFIGCOMBO,96,31,232,87,
+                    CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_A26_CNT_RIGHT_DEVICE,49,102,200,58,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_A26_CNT_DOWN_DEVICE,49,76,200,65,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_A26_CNT_LEFT_DEVICE,49,90,200,63,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_A26_CNT_RIGHT_KEY,257,102,73,73,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    GROUPBOX        "Autoconfigure",IDC_STATIC,7,21,330,27
+    COMBOBOX        IDC_A26_CNT_DOWN_KEY,257,76,73,72,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_A26_CNT_LEFT_KEY,257,90,73,75,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+END
+
+IDD_COL_TRACE DIALOG DISCARDABLE  0, 0, 186, 125
+STYLE WS_POPUP | WS_CAPTION
+CAPTION "CPU Trace"
+FONT 8, "MS Sans Serif"
+BEGIN
+END
+
+IDD_COL_REGISTERS DIALOG DISCARDABLE  0, 0, 186, 95
+STYLE WS_POPUP | WS_CAPTION
+CAPTION "Registers"
+FONT 8, "MS Sans Serif"
+BEGIN
+END
+
+IDD_COL_DUMPS DIALOG DISCARDABLE  0, 0, 186, 95
+STYLE WS_POPUP | WS_CAPTION
+CAPTION "Dumps/Commands"
+FONT 8, "MS Sans Serif"
+BEGIN
+    PUSHBUTTON      "Dump PPU Memory",IDC_DUMP_PPU_MEM,7,7,71,12
+    PUSHBUTTON      "Start Logging",IDC_START_LOGGING,79,7,71,12
+    PUSHBUTTON      "Stop Logging",IDC_STOP_LOGGING,79,19,71,12
+    PUSHBUTTON      "IRQ",IDC_IRQBUTTON,7,19,71,12
+END
+
+IDD_COL_CONTROLLERS DIALOG DISCARDABLE  0, 0, 344, 220
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION
+CAPTION "Controller Config"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "Close",ID_CONTROLLERDIALOG_OK,145,199,50,14
+    COMBOBOX        IDC_COL_CONTROLLERS_PLAYER_COMBO,123,7,97,58,
+                    CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    GROUPBOX        "Arrows",IDC_STATIC,7,52,330,69
+    GROUPBOX        "Buttons",IDC_STATIC,7,126,330,69,WS_GROUP
+    LTEXT           "A Button",IDC_STATIC,14,140,33,13
+    LTEXT           "B Button",IDC_STATIC,14,153,33,13
+    LTEXT           "Select",IDC_STATIC,14,166,33,13
+    LTEXT           "Start",IDC_STATIC,14,179,33,13
+    COMBOBOX        IDC_NES_CNT_A_DEVICE,49,137,200,61,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_GROUP | WS_TABSTOP
+    COMBOBOX        IDC_NES_CNT_A_KEY,257,137,73,76,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_GROUP | WS_TABSTOP
+    COMBOBOX        IDC_NES_CNT_B_DEVICE,49,150,200,65,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_GROUP | WS_TABSTOP
+    COMBOBOX        IDC_NES_CNT_SEL_DEVICE,49,164,200,63,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_GROUP | WS_TABSTOP
+    COMBOBOX        IDC_NES_CNT_STR_DEVICE,49,177,200,58,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_GROUP | WS_TABSTOP
+    COMBOBOX        IDC_NES_CNT_B_KEY,257,150,73,72,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_GROUP | WS_TABSTOP
+    COMBOBOX        IDC_NES_CNT_SEL_KEY,257,164,73,75,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_GROUP | WS_TABSTOP
+    COMBOBOX        IDC_NES_CNT_STR_KEY,257,177,73,73,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_GROUP | WS_TABSTOP
+    LTEXT           "Up",IDC_STATIC,14,66,33,13
+    LTEXT           "Down",IDC_STATIC,14,78,33,13
+    LTEXT           "Left",IDC_STATIC,14,91,33,13
+    LTEXT           "Right",IDC_STATIC,14,104,33,13
+    COMBOBOX        IDC_NES_CNT_UP_DEVICE,49,63,200,61,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_NES_CNT_UP_KEY,257,63,73,68,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_NES_CNT_DOWN_DEVICE,49,76,200,65,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_NES_CNT_LEFT_DEVICE,49,90,200,63,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_NES_CNT_RIGHT_DEVICE,49,102,200,58,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_NES_CNT_DOWN_KEY,257,76,73,72,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_NES_CNT_LEFT_KEY,257,90,73,75,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_NES_CNT_RIGHT_KEY,257,102,73,73,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "AutoConfigure To:",IDC_NES_CNT_AUTOCONFIGTO,13,30,75,14
+    COMBOBOX        IDC_NES_CNT_AUTOCONFIGCOMBO,96,31,232,87,
+                    CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    GROUPBOX        "Autoconfigure",IDC_STATIC,7,21,330,27
+END
+
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#define APSTUDIO_HIDDEN_SYMBOLS\r\n"
+    "#include ""windows.h""\r\n"
+    "#undef APSTUDIO_HIDDEN_SYMBOLS\r\n"
+    "#include ""resource.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_ABOUTBOX, DIALOG
+    BEGIN
+        RIGHTMARGIN, 125
+        BOTTOMMARGIN, 66
+    END
+
+    IDD_NES_PALETTE, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 170
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 24
+    END
+
+    IDD_NES_PATTERN, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 179
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 88
+    END
+
+    IDD_NAME, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 315
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 211
+    END
+
+    IDD_NES_DUMPS, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 179
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 88
+    END
+
+    IDD_NES_REGISTERS, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 179
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 88
+    END
+
+    IDD_A26_DUMPS, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 179
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 88
+    END
+
+    IDD_A26_REGISTERS, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 179
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 88
+    END
+
+    IDD_GEN_DUMPS, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 179
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 88
+    END
+
+    IDD_GEN_REGISTERS, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 179
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 88
+    END
+
+    IDD_NES_CONTROLLERS, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 337
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 213
+    END
+
+    IDD_A26_CONTROLLERS, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 337
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 176
+    END
+
+    IDD_COL_REGISTERS, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 179
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 88
+    END
+
+    IDD_COL_DUMPS, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 179
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 88
+    END
+
+    IDD_COL_CONTROLLERS, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 337
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 213
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDI_NINTHSTAR           ICON    DISCARDABLE     "NinthStar.ICO"
+IDI_SMALL               ICON    DISCARDABLE     "SMALL.ICO"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_APP_TITLE           "NinthStar"
+    IDC_NINTHSTAR           "NinthStar"
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+
